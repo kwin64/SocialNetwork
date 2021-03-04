@@ -1,0 +1,14 @@
+.post {
+    border: 1px solid black;
+    margin: 50px 20px;
+    font-size: 20px;
+    background-color: #F2F2F2;
+}
+
+.post textarea{
+}
+
+.textarea {
+    padding: 10px;
+}
+

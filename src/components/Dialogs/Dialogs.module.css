@@ -1,0 +1,12 @@
+.container {
+  background-color: #F2F2F2;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+
+
+
+
+
+
+

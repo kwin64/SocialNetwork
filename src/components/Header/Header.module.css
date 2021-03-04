@@ -1,0 +1,15 @@
+.container {
+    grid-area: h;
+    background-color: #F2F2F2;
+    margin-top: 10px;
+}
+
+.container img {
+    margin: 10px auto 10px 20px;
+    width: 200px;
+    height: 30px;
+}
+
+
+
+
