@@ -7,11 +7,11 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
-import {StateType} from "./redux/store";
+import {ActionsType, StateType} from "./redux/store";
 
 type PropsType = {
     state: StateType,
-    dispatch: any
+    dispatch: (action: ActionsType) => void
 }
 
 

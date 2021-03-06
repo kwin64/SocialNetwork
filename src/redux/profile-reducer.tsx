@@ -37,7 +37,21 @@ let initialState = {
     newPostText: ''
 }
 
-const profileReducer = (state: PostsDataType = initialState, action: any): PostsDataType => {
+export type ActionsPostType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export const addPostAC = (newPostText: string) => {
+    return {
+        type: 'ADD-POST',
+        newPostText: newPostText
+    } as const
+}
+export const updateNewPostTextAC = (newPostText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newPostText: newPostText
+    } as const
+}
+
+const profileReducer = (state: PostsDataType = initialState, action: ActionsPostType): PostsDataType => {
     switch (action.type) {
         case ADD_POST:
             let post = {
@@ -51,7 +65,7 @@ const profileReducer = (state: PostsDataType = initialState, action: any): Posts
             state.newPostText = '';
             return state
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.postMessage;
+            state.newPostText = action.newPostText;
             return state;
         default:
             return state;

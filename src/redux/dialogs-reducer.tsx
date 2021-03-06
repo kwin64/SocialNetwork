@@ -1,4 +1,4 @@
-import {DialogDataType, StateType} from "./store";
+import {DialogDataType} from "./store";
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const ADD_MESSAGE = 'ADD-MESSAGE';
@@ -22,7 +22,22 @@ let initialState = {
         },
 }
 
-const dialogsReducer = (state:DialogDataType = initialState, action: any):DialogDataType => {
+export type ActionsMessageType =  ReturnType<typeof addMessageAC>| ReturnType<typeof updateNewMessageTextAC>
+export const addMessageAC = (newMessage: string)  => {
+    return {
+        type: 'ADD-MESSAGE',
+        newMessage:newMessage
+    } as const
+}
+export const updateNewMessageTextAC = (newMessage: string)  => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMessage:newMessage
+    } as const
+}
+
+
+const dialogsReducer = (state:DialogDataType = initialState, action: ActionsMessageType):DialogDataType => {
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage = {

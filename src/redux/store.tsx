@@ -1,7 +1,7 @@
 import React from 'react';
-import profileReducer from "./profile-reducer";
+import profileReducer, {ActionsPostType} from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import dialogsReducer from "./dialogs-reducer";
+import dialogsReducer, {ActionsMessageType} from "./dialogs-reducer";
 
 export type FriendsListType = {
     id: number,
@@ -51,13 +51,13 @@ export type StateType = {
 }
 
 export type StoreType = {
-    _state: StateType
-    _callSubscriber: any
-    getState: () => StateType
-    subscribe: any
-    dispatch: (action: any) => void
-
+    _state: StateType,
+    _callSubscriber: any,
+    getState: () => StateType,
+    subscribe: (callback: ()=> void) => void,
+    dispatch: (action: ActionsType) => void
 }
+export type ActionsType = ActionsPostType | ActionsMessageType
 
 let store: StoreType = {
     _state: {
@@ -128,14 +128,12 @@ let store: StoreType = {
     _callSubscriber() {
         console.log('state changed');
     },
-
     getState() {
         return this._state;
     },
     subscribe(observer: (state: StateType) => void) {
         this._callSubscriber = observer;
     },
-
     dispatch(action: any) {
         this._state.postsData = profileReducer(this._state.postsData, action);
         this._state.dialogsData = dialogsReducer(this._state.dialogsData, action);
@@ -143,7 +141,6 @@ let store: StoreType = {
         this._callSubscriber(this._state)
     }
 }
-
 
 export default store;
 

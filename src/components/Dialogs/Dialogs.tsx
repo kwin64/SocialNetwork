@@ -2,13 +2,12 @@ import React from "react";
 import s from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Messages from "./Messages/Messages";
-import { DialogDataType } from "../../redux/store";
-import {addMessageActionCreator, newMessageChangeActionCreator} from "../../redux/dialogs-reducer";
+import {ActionsType, DialogDataType} from "../../redux/store";
 
 
 type PropsType = {
     dialogsData: DialogDataType,
-    dispatch: any,
+    dispatch: (action: ActionsType) => void
 }
 
 
@@ -20,7 +19,8 @@ const Dialogs: React.FC<PropsType> = (props) => {
 
     let addMessage = () => {
         if (newMessageElement.current){
-            props.dispatch(addMessageActionCreator())
+            // props.dispatch(addMessageActionCreator())
+            props.dispatch({type: "ADD-MESSAGE",newMessage:props.dialogsData.message.newMessage})
         }
     }
 
@@ -28,7 +28,8 @@ const Dialogs: React.FC<PropsType> = (props) => {
 
         if (newMessageElement.current){
             let text = newMessageElement.current.value
-            props.dispatch(newMessageChangeActionCreator(text))
+            // props.dispatch(newMessageChangeActionCreator(text))
+            props.dispatch({type:"UPDATE-NEW-MESSAGE-TEXT",newMessage:props.dialogsData.message.newMessage})
         }
     }
 

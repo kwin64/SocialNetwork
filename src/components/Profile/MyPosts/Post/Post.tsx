@@ -1,11 +1,11 @@
 import React from 'react';
 import s from "./Post.module.css"
-import {PostsDataType} from "../../../../redux/store";
+import {ActionsType, PostsDataType} from "../../../../redux/store";
 import {addPostActionCreator, updateNewPostChangeActionCreator} from "../../../../redux/profile-reducer";
 
 type PropsType = {
     postsData: PostsDataType,
-    dispatch: any
+    dispatch: (action: ActionsType) => void
 }
 
 const Post: React.FC<PropsType> = (props) => {
@@ -13,14 +13,16 @@ const Post: React.FC<PropsType> = (props) => {
 
     let AddPost = () => {
         if (newPostElement.current) {
-            props.dispatch(addPostActionCreator())
+            // props.dispatch(addPostActionCreator())
+            props.dispatch({type:"ADD-POST",newPostText: props.postsData.newPostText})
         }
     }
 
     let onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
-            props.dispatch(updateNewPostChangeActionCreator(text))
+            // props.dispatch(updateNewPostChangeActionCreator(text))
+            props.dispatch({type:"UPDATE-NEW-POST-TEXT", newPostText:props.postsData.newPostText})
         }
     }
 

@@ -2,12 +2,12 @@ import React from 'react';
 import s from "./MyPosts.module.css"
 import Posts from "./Posts/Posts";
 import Post from "./Post/Post";
-import {PostsDataType} from "../../../redux/store";
+import {ActionsType, PostsDataType} from "../../../redux/store";
 
 
 type PropsType = {
     postsData: PostsDataType,
-    dispatch: any
+    dispatch: (action: ActionsType) => void
 }
 
 const MyPosts: React.FC<PropsType> = (props) => {

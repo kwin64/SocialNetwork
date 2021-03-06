@@ -1,5 +1,3 @@
-import {StateType} from "./store";
-
 let initialState = {
     friendsList: [
         {id: 1, avatar: 'https://avatarko.ru/img/kartinka/1/zhivotnye_catmen.jpg', name: 'Tatsiana'},
