@@ -1,4 +1,4 @@
-import {PostsDataType} from "./store";
+import {ActionsType, PostsDataType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -51,7 +51,7 @@ export const updateNewPostTextAC = (newPostText: string) => {
     } as const
 }
 
-const profileReducer = (state: PostsDataType = initialState, action: ActionsPostType): PostsDataType => {
+const profileReducer = (state: PostsDataType = initialState, action: ActionsType): PostsDataType => {
     switch (action.type) {
         case ADD_POST:
             let post = {

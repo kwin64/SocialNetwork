@@ -22,7 +22,7 @@ const Post: React.FC<PropsType> = (props) => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
             // props.dispatch(updateNewPostChangeActionCreator(text))
-            props.dispatch({type:"UPDATE-NEW-POST-TEXT", newPostText:props.postsData.newPostText})
+            props.dispatch({type:"UPDATE-NEW-POST-TEXT", newPostText:text})
         }
     }
 

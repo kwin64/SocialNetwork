@@ -134,7 +134,7 @@ let store: StoreType = {
     subscribe(observer: (state: StateType) => void) {
         this._callSubscriber = observer;
     },
-    dispatch(action: any) {
+    dispatch(action) {
         this._state.postsData = profileReducer(this._state.postsData, action);
         this._state.dialogsData = dialogsReducer(this._state.dialogsData, action);
         this._state.sidebarData = sidebarReducer(this._state.sidebarData, action);
