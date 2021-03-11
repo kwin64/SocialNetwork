@@ -2,16 +2,18 @@ import React from "react";
 import s from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Messages from "./Messages/Messages";
-import {ActionsType, DialogDataType} from "../../redux/store";
+import {ActionsType, DialogDataType, StateType} from "../../redux/store";
 
 
 type PropsType = {
-    dialogsData: DialogDataType,
-    dispatch: (action: ActionsType) => void
+    dialogsData: DialogDataType
+    updateNewMessageText: (text: string) => void
+    addMessage: () => void
 }
 
 
 const Dialogs: React.FC<PropsType> = (props) => {
+
     const dialogElements = props.dialogsData.dialogs.dialogsItem.map(d => <Dialog id={d.id} name={d.name}/>);
     const messagesElements = props.dialogsData.message.messagesItem.map(m => <Messages id={m.id} message={m.message}/>)
 
@@ -19,15 +21,14 @@ const Dialogs: React.FC<PropsType> = (props) => {
 
     let addMessage = () => {
         if (newMessageElement.current){
-            props.dispatch({type: "ADD-MESSAGE",newMessage:props.dialogsData.message.newMessage})
+            props.addMessage()
         }
     }
 
     let newMessageChange = () => {
-
         if (newMessageElement.current){
             let text = newMessageElement.current.value
-            props.dispatch({type:"UPDATE-NEW-MESSAGE-TEXT",newMessage:text})
+            props.updateNewMessageText(text)
         }
     }
 

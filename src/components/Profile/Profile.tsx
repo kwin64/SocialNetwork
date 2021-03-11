@@ -1,19 +1,20 @@
 import React from 'react';
 import Description from "./Description/Description";
 import MyPosts from "./MyPosts/MyPosts";
-import {ActionsType, PostsDataType} from "../../redux/store";
+import {ActionsType, PostsDataType, StateType} from "../../redux/store";
 
 
 type PropsType = {
-    postsData: PostsDataType,
+    store: StateType
     dispatch: (action: ActionsType) => void
+
 }
 
 const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
             <Description/>
-            <MyPosts postsData={props.postsData}
+            <MyPosts store={props.store}
                      dispatch={props.dispatch}
             />
         </div>

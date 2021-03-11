@@ -8,9 +8,10 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import {ActionsType, StateType} from "./redux/store";
+import DialogContainer from "./components/Dialogs/DialogsContainer";
 
 type PropsType = {
-    state: StateType,
+    store: StateType
     dispatch: (action: ActionsType) => void
 }
 
@@ -20,11 +21,11 @@ const App: React.FC<PropsType> = (props) => {
         <BrowserRouter>
             <div className={'appWrapper'}>
                 <Header/>
-                <Sidebar sidebarData={props.state.sidebarData}/>
+                <Sidebar sidebarData={props.store.sidebarData}/>
                 <div className={'appWrapperContent'}>
-                    <Route path='/Dialogs' render={() => <Dialogs dialogsData={props.state.dialogsData}
-                                                                  dispatch={props.dispatch}/>}/>
-                    <Route path='/Profile' render={() => <Profile postsData={props.state.postsData}
+                    <Route path='/Dialogs' render={() => <DialogContainer store={props.store}
+                                                                          dispatch={props.dispatch}/>}/>
+                    <Route path='/Profile' render={() => <Profile store={props.store}
                                                                   dispatch={props.dispatch}
                     />}/>
                     <Route path='/Music' component={Music}/>
