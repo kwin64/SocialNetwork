@@ -4,20 +4,20 @@ import sidebarReducer from "./sidebar-reducer";
 import dialogsReducer, {ActionsMessageType} from "./dialogs-reducer";
 
 export type FriendsListType = {
-    id: number,
-    avatar: string,
-    name: string,
+    id: number
+    avatar: string
+    name: string
 }
 export type PostsItemType = {
-    id: number,
-    avatar: string,
-    count: number,
-    post: string,
-    logoCountLikes: string,
+    id: number
+    avatar: string
+    count: number
+    post: string
+    logoCountLikes: string
 }
 export type MessagesItemType = {
-    id: number,
-    message: string,
+    id: number
+    message: string
 }
 export type DialogsItemType = {
     id: number,
@@ -25,7 +25,7 @@ export type DialogsItemType = {
 }
 
 export type MessageType = {
-    messagesItem: Array<MessagesItemType>,
+    messagesItem: Array<MessagesItemType>
     newMessage: string
 }
 export type DialogsType = {
@@ -36,25 +36,25 @@ export type SidebarDataType = {
     friendsList: Array<FriendsListType>
 }
 export type PostsDataType = {
-    postsItem: Array<PostsItemType>,
+    postsItem: Array<PostsItemType>
     newPostText: string
 }
 export type DialogDataType = {
-    dialogs: DialogsType,
-    message: MessageType,
+    dialogs: DialogsType
+    message: MessageType
 }
 
 export type StateType = {
-    dialogsData: DialogDataType,
-    postsData: PostsDataType,
+    dialogsData: DialogDataType
+    postsData: PostsDataType
     sidebarData: SidebarDataType
 }
 
 export type StoreType = {
-    _state: StateType,
-    _callSubscriber: any,
-    getState: () => StateType,
-    subscribe: (callback: ()=> void) => void,
+    _state: StateType
+    _callSubscriber: any
+    getState: () => StateType
+    subscribe: (callback: ()=> void) => void
     dispatch: (action: ActionsType) => void
 }
 export type ActionsType = ActionsPostType | ActionsMessageType

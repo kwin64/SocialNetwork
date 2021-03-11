@@ -1,30 +1,35 @@
 import React from "react";
-import s from './Dialogs.module.css'
-import Dialog from "./Dialog/Dialog";
-import Messages from "./Messages/Messages";
-import {ActionsType, StateType} from "../../redux/store";
 import Dialogs from "./Dialogs";
+import StoreContext from "../../StoreContext";
 
 
-type PropsType = {
-    store: StateType
-    dispatch: (action: ActionsType) => void
+// type PropsType = {
+//     store: StoreType
+// }
+
+
+const DialogContainer = () => {
+
+
+    return (
+        <StoreContext.Consumer> {
+            (store) => {
+                let dialogsData = store.getState().dialogsData
+
+                let addMessage = () => {
+                    store.dispatch({type: "ADD-MESSAGE", newMessage: dialogsData.message.newMessage})
+                }
+                let newMessageChange = (text: string) => {
+                    store.dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", newMessage: text})
+                }
+
+                return <Dialogs dialogsData={dialogsData}
+                                addMessage={addMessage}
+                                updateNewMessageText={newMessageChange}/>
+            }
+        }
+        </StoreContext.Consumer>
+    )
 }
 
-
-const DialogContainer: React.FC<PropsType> = (props) => {
-
-    let dialogsData = props.store.dialogsData
-
-    let addMessage = () => {
-        props.dispatch({type: "ADD-MESSAGE", newMessage: props.store.dialogsData.message.newMessage})
-    }
-    let newMessageChange = (text: string) => {
-        props.dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", newMessage: text})
-    }
-
-    return <Dialogs dialogsData={dialogsData}
-                    addMessage={addMessage}
-                    updateNewMessageText={newMessageChange}/>
-}
 export default DialogContainer;
