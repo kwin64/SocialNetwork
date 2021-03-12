@@ -5,14 +5,14 @@ import {StateType, StoreType} from "../../redux/store";
 
 
 type PropsType = {
-    store: StoreType
+    state: StateType
 }
 
 const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
             <Description/>
-            <MyPosts store={props.store}/>
+            <MyPosts state={props.state}/>
         </div>
     );
 }
