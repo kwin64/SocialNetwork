@@ -52,8 +52,11 @@ export const updateNewPostTextAC = (newPostText: string) => {
 }
 
 const profileReducer = (state: PostsDataType = initialState, action: ActionsType): PostsDataType => {
+
+    const stateCopy = {...state}
+
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let post = {
                 id: 5,
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXQAMy48Pkvq3wmB9wngITgF95ZNOaXEK3FA&usqp=CAU',
@@ -61,12 +64,14 @@ const profileReducer = (state: PostsDataType = initialState, action: ActionsType
                 post: state.newPostText,
                 logoCountLikes: 'https://img.icons8.com/pastel-glyph/2x/facebook-like--v1.png',
             }
-            state.postsItem.unshift(post);
-            state.newPostText = '';
-            return state
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newPostText;
-            return state;
+            stateCopy.postsItem.unshift(post)
+            stateCopy.newPostText = ''
+            return stateCopy
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            stateCopy.newPostText = action.newPostText
+            return stateCopy
+        }
         default:
             return state;
     }
