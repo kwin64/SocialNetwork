@@ -52,7 +52,7 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType
-    _callSubscriber: any
+    _callSubscriber: (state: StateType) => void
     getState: () => StateType
     subscribe: (callback: ()=> void) => void
     dispatch: (action: ActionsType) => void
@@ -125,7 +125,7 @@ let store: StoreType = {
 
         }
     },
-    _callSubscriber() {
+    _callSubscriber(state ) {
         console.log('state changed');
     },
     getState() {

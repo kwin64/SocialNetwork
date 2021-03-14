@@ -11,7 +11,7 @@ import {BrowserRouter} from "react-router-dom";
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={store}>
-            <App state={store}/>
+            <App store={store}/>
         </Provider>
     </BrowserRouter>, document.getElementById('root')
 );
