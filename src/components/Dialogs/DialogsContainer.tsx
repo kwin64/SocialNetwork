@@ -4,13 +4,12 @@ import {connect} from "react-redux";
 import {StateType} from "../../redux/store";
 import {addMessageActionCreator, newMessageChangeActionCreator} from "../../redux/dialogs-reducer";
 
-
 let mapStateToProps = (state: StateType) => {
     return {
         dialogsData: state.dialogsData
     }
 }
-let mapDispatchToProps = (dispatch: (arg0: { type: string; postMessage?: string; }) => void) => {//????
+let mapDispatchToProps = (dispatch: (arg0: { type: string; newMessage?: string; }) => void ) => {//????
     return {
         updateNewMessageText: (text: string)=> {
             dispatch(newMessageChangeActionCreator(text))

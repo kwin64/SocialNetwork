@@ -6,7 +6,8 @@ import {addPostActionCreator, updateNewPostChangeActionCreator} from "../../../.
 
 let mapStateToProps = (state: StateType) => {
     return {
-        newPostText: state.postsData.newPostText
+        posts: state.postsData
+        // newPostText: state.postsData.newPostText
     }
 }
 let mapDispatchToProps = (dispatch: (arg0: { type: string; postMessage?: string; }) => void) => {//?????

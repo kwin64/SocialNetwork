@@ -25,6 +25,9 @@ const Sidebar: React.FC<PropsType> = (props) => {
                     <div className={s.itemNav}>
                         <li><NavLink to='/Settings' activeClassName={s.active}>Settings</NavLink></li>
                     </div>
+                    <div className={s.itemNav}>
+                        <li><NavLink to='/Users' activeClassName={s.active}>Users</NavLink></li>
+                    </div>
                 </ul>
             </nav>
             <div className={s.containerFriends}>

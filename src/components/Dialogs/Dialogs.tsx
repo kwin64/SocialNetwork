@@ -20,13 +20,12 @@ const Dialogs: React.FC<PropsType> = (props) => {
     let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     let addMessage = () => {
-        if (newMessageElement.current){
+        if (newMessageElement.current) {
             props.addMessage()
         }
     }
-
     let newMessageChange = () => {
-        if (newMessageElement.current){
+        if (newMessageElement.current) {
             let text = newMessageElement.current.value
             props.updateNewMessageText(text)
         }

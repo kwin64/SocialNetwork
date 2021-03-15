@@ -7,8 +7,9 @@ import {Route} from 'react-router-dom';
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import DialogContainer from "./components/Dialogs/DialogsContainer";
-import {StateType, StoreType} from "./redux/store";
 import {Store} from "redux";
+import Users from './components/Users/Users';
+import UsersContainer from "./components/Users/UsersContainer";
 
 type PropsType = {
     store: Store
@@ -22,6 +23,7 @@ const App: React.FC<PropsType> = (props) => {
             <div className={'appWrapperContent'}>
                 <Route path='/Dialogs' render={() => <DialogContainer />}/>
                 <Route path='/Profile' render={() => <Profile state={props.store.getState()}/>}/>
+                <Route path='/Users' render={() => <UsersContainer />}/>
                 <Route path='/Music' component={Music}/>
                 <Route path='/Settings' component={Settings}/>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Description from "./Description/Description";
 import MyPosts from "./MyPosts/MyPosts";
-import {StateType, StoreType} from "../../redux/store";
+import {StateType} from "../../redux/store";
 
 
 type PropsType = {
