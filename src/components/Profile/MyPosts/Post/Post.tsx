@@ -1,12 +1,10 @@
 import React from 'react';
 import s from "./Post.module.css"
-import {PostsDataType} from "../../../../redux/store";
 
 type PropsType = {
     AddPost: () => void
     onPostChange: (text: string) => void
-    posts: PostsDataType
-    // newPostText:string
+    newPostText:string
 }
 
 const Post: React.FC<PropsType> = (props) => {
@@ -29,7 +27,7 @@ const Post: React.FC<PropsType> = (props) => {
             <div className={s.textarea}>
                 <textarea ref={newPostElement}
                           onChange={onPostChange}
-                          value={props.posts.newPostText}/>
+                          value={props.newPostText}/>
                 <button onClick={AddPost}>Add post</button>
             </div>
         </div>

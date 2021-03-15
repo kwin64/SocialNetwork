@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Posts.module.css"
 import OnePost from "./OnePost/OnePost";
-import {PostsDataType} from "../../../../redux/store";
+import {PostsDataType} from "../../../../redux/redux-store";
 
 
 type PropsType = {

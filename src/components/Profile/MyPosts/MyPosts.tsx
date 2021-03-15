@@ -1,19 +1,19 @@
 import React from 'react';
 import s from "./MyPosts.module.css"
 import Posts from "./Posts/Posts";
-import {StateType} from "../../../redux/store";
 import MyPostContainer from "./Post/MyPostContainer";
+import {PostsDataType} from "../../../redux/redux-store";
 
 
 type PropsType = {
-    state: StateType
+    postsData: PostsDataType
 }
 
 const MyPosts: React.FC<PropsType> = (props) => {
     return (
         <div className={s.post}>
             <MyPostContainer />
-            <Posts postsData={props.state.postsData}/>
+            <Posts postsData={props.postsData}/>
         </div>
     );
 }

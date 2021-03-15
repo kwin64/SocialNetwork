@@ -1,10 +1,8 @@
 import React from 'react';
 import s from "./OnePost.module.css"
-import {PostsItemType} from "../../../../../redux/store";
+import {OnePostItem} from "../../../../../redux/redux-store";
 
-
-
-const OnePost: React.FC<PostsItemType> = (props) => {
+const OnePost: React.FC<OnePostItem> = (props) => {
     return (
         <div className={s.post}>
             <span>

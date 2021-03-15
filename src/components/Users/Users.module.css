@@ -1,0 +1,33 @@
+.container{
+    margin: 10px 200px 10px 100px;
+}
+.oneUser {
+    border: 1px solid green;
+}
+
+.areaUser {
+    display: inline-block;
+    justify-content: center;
+    box-sizing: content-box;
+    position: static;
+}
+
+.avatar {
+    justify-content: center;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.button {
+    justify-content: center;
+}
+
+.descriptionArea {
+    background-color: #F2F2F2;
+    border: 1px solid blue;
+    width: 300px;
+    height: 100px;
+}

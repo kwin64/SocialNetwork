@@ -2,20 +2,18 @@ import React from "react";
 import s from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Messages from "./Messages/Messages";
-import {DialogDataType} from "../../redux/store";
-
+import {DialogsDataType} from "../../redux/redux-store";
 
 type PropsType = {
-    dialogsData: DialogDataType
+    dialogsData: DialogsDataType,
     updateNewMessageText: (text: string) => void
     addMessage: () => void
 }
 
-
 const Dialogs: React.FC<PropsType> = (props) => {
 
-    const dialogElements = props.dialogsData.dialogs.dialogsItem.map(d => <Dialog id={d.id} name={d.name}/>);
-    const messagesElements = props.dialogsData.message.messagesItem.map(m => <Messages id={m.id} message={m.message}/>)
+    const dialogElements = props.dialogsData.dialogs.map(d => <Dialog id={d.id} name={d.name}/>);
+    const messagesElements = props.dialogsData.message.messageItem.map(m => <Messages id={m.id} message={m.message}/>)
 
     let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 

@@ -1,14 +1,19 @@
 import React from 'react';
 import s from './Sidebar.module.css'
 import {NavLink} from "react-router-dom";
-import {SidebarDataType} from "../../redux/store";
+import {SidebarDataType} from "../../redux/redux-store";
 
 type PropsType = {
-    sidebarData: SidebarDataType,
+    sidebarData: SidebarDataType
 }
 
 const Sidebar: React.FC<PropsType> = (props) => {
-    let friendsListElements = props.sidebarData.friendsList.map(f => (<span><p>{/*f.id*/}{f.name}</p><img src={f.avatar}/></span>))
+    debugger
+    let friendsListElements = props.sidebarData.friendsList.map(f => (
+        <span>
+            <p>{/*f.id*/}{f.name}</p>
+            <img src={f.avatar}/>
+        </span>))
     return (
         <div className={s.container}>
             <nav className={s.nav}>

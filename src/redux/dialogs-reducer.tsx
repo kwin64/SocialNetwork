@@ -1,19 +1,17 @@
-import {ActionsType, DialogDataType} from "./store";
+import {ActionsType, DialogsDataType} from "./redux-store";
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
 let initialState = {
-    dialogs: {
-        dialogsItem: [
-            {id: 1, name: 'Eugene'},
-            {id: 2, name: 'Anna'},
-            {id: 3, name: 'Alex'},
-            {id: 4, name: 'Tatsiana'},
-        ],
-    },
+    dialogs: [
+        {id: 1, name: 'Eugene'},
+        {id: 2, name: 'Anna'},
+        {id: 3, name: 'Alex'},
+        {id: 4, name: 'Tatsiana'},
+    ],
     message: {
-        messagesItem: [
+        messageItem: [
             {id: 1, message: 'message1'},
             {id: 2, message: 'message2'},
             {id: 3, message: 'message3'},
@@ -36,20 +34,19 @@ export const updateNewMessageTextAC = (newMessage: string) => {
     } as const
 }
 
-
-const dialogsReducer = (state: DialogDataType = initialState, action: ActionsType): DialogDataType => {
+const dialogsReducer = (state: DialogsDataType = initialState, action: ActionsType): DialogsDataType => {
 
     let stateCopy = {...state}
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT: {
             stateCopy.message.newMessage = action.newMessage
-            }
+        }
             return stateCopy
         case ADD_MESSAGE: {
             let newMessage = stateCopy.message.newMessage
             stateCopy.message.newMessage = ''
-            stateCopy.message.messagesItem.push({id: 4,message: newMessage})
+            stateCopy.message.messageItem.push({id: 4, message: newMessage})
         }
             return stateCopy
         default:
