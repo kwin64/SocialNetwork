@@ -6,7 +6,7 @@ import {followAC, setUsersAC, unfollowAC, UserData} from "../../redux/users-redu
 
 let mapStateToProps = (state: StateType) => {
     return {
-        users: state.usersData
+        users: state.
     }
 }
 

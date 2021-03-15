@@ -1,5 +1,3 @@
-import {ActionsType, PostsDataType} from "./store";
-
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -24,6 +22,7 @@ let initialState = {
     users: [
         {
             id: 1,
+            avatar:'https://p1.hiclipart.com/preview/169/1023/715/login-logo-user-users-group-customer-education-button-typeface-credential-png-clipart.jpg',
             fullName: 'Eugene',
             status: 'status1',
             location: {
@@ -33,7 +32,8 @@ let initialState = {
             followed: true
         },
         {
-            id: 1,
+            id: 2,
+            avatar:'https://p1.hiclipart.com/preview/169/1023/715/login-logo-user-users-group-customer-education-button-typeface-credential-png-clipart.jpg',
             fullName: 'Alex',
             status: 'status1',
             location: {
@@ -43,22 +43,13 @@ let initialState = {
             followed: true
         },
         {
-            id: 2,
+            id: 3,
+            avatar:'https://p1.hiclipart.com/preview/169/1023/715/login-logo-user-users-group-customer-education-button-typeface-credential-png-clipart.jpg',
             fullName: 'Tatsiana',
             status: 'status2',
             location: {
                 city: 'Moscow',
                 country: 'Russia'
-            },
-            followed: false
-        },
-        {
-            id: 3,
-            fullName: 'Anna',
-            status: 'status3',
-            location: {
-                city: 'England',
-                country: 'London'
             },
             followed: false
         },

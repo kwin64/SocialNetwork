@@ -14,7 +14,7 @@ const Users: React.FC<PropsType> = (props) => {
             {props.usersData.map(u => <div key={u.id}>)
                 <span>
                 <div>
-                    <img/>
+                    <img src={u.avatar}/>
                 </div>
                 <div>
                     <button>Follow</button>
