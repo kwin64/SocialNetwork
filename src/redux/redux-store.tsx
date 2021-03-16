@@ -32,16 +32,20 @@ export type SidebarDataType = {
     friendsList: Array<OneFriendItems>
 }
 
+export type PhotosType = {
+    small: null
+    large:null
+}
 export type locationUserType = {
     city: string,
     country: string
 }
 export type OneUserData = {
+    name: string,
     id: number,
-    avatar: string,
-    fullName: string,
-    status: string,
-    location: locationUserType
+    uniqueUrlName: null;
+    photos: PhotosType,
+    status: null
     followed: boolean
 }
 export type UsersDataType = {
