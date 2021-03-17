@@ -11,14 +11,18 @@ type PropsType = {
 }
 
 const Users: React.FC<PropsType> = (props) => {
-    debugger
-    if (props.userData.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: any) => {
-            props.setUsers(response.data.items)
-        })
+
+    const getUsers = () => {
+        if (props.userData.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: any) => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
+
     return (
         <div className={s.container}>
+            <button onClick={getUsers}></button>
             {props.userData.map(u => <div key={u.id}>
                 <div className={s.oneUser}>
                     <div className={s.areaUser}>
