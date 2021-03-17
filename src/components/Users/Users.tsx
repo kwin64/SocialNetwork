@@ -1,7 +1,7 @@
 import React from 'react';
-import {OneUserData} from '../../redux/redux-store';
 import s from './Users.module.css'
-import * as axios from 'axios';
+import axios from 'axios';
+import {OneUserData} from '../../redux/users-reducer';
 
 type PropsType = {
     userData: Array<OneUserData>
@@ -11,10 +11,10 @@ type PropsType = {
 }
 
 const Users: React.FC<PropsType> = (props) => {
+    debugger
     if (props.userData.length === 0) {
-        // @ts-ignore
-        axios.get('https://social-network.samuraijs.com/api/1.0').then((response: { data: { item: () => OneUserData[]; }; }) => {
-            props.setUsers(response.data.item())
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: any) => {
+            props.setUsers(response.data.items)
         })
     }
     return (
@@ -43,7 +43,7 @@ const Users: React.FC<PropsType> = (props) => {
 
                 <div className={s.descriptionArea}>
                     <div>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </div>
                     <div>

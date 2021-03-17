@@ -1,35 +1,28 @@
-import {OneUserData, UsersDataType} from "./redux-store";
-
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+
+export type PhotosType = {
+    small: null | string
+    large:null | string
+}
+export type OneUserData = {
+    name: string,
+    id: number,
+    uniqueUrlName: null;
+    photos: PhotosType,
+    status: null
+    followed: boolean
+}
+export type UsersDataType = {
+    users: Array<OneUserData>
+}
 
 let initialState = {
     users: [],
 }
 
-export type ActionsUsersType = ReturnType<typeof follow> | ReturnType<typeof unFollow> | ReturnType<typeof setUsers>
-export const follow = (userID: number) => {
-    return {
-        type: 'FOLLOW',
-        userID: userID
-    } as const
-}
-export const unFollow = (userID: number) => {
-    return {
-        type: 'UNFOLLOW',
-        userID: userID
-    } as const
-}
-export const setUsers = (users: Array<OneUserData>) => {
-    return {
-        type: 'SET_USERS',
-        users: users
-    } as const
-}
-
 const usersReducer = (state: UsersDataType = initialState, action: ActionsUsersType): UsersDataType => {
-
     switch (action.type) {
         case FOLLOW:
             return {
@@ -59,9 +52,10 @@ const usersReducer = (state: UsersDataType = initialState, action: ActionsUsersT
     }
 }
 
+export const follow = (userID: number) => ({type: FOLLOW, userID} as const)
+export const unFollow = (userID: number) => ({type: UNFOLLOW, userID} as const)
+export const setUsers = (users: Array<OneUserData>) => ({type: SET_USERS, users} as const)
 
-export const followAC = (userID: number) => ({type: FOLLOW, userID})
-export const unfollowAC = (userID: number) => ({type: UNFOLLOW, userID})
-export const setUsersAC = (users: Array<OneUserData>) => ({type: SET_USERS, users})
+export type ActionsUsersType = ReturnType<typeof follow> | ReturnType<typeof unFollow> | ReturnType<typeof setUsers>
 
 export default usersReducer;

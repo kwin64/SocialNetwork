@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./OnePost.module.css"
-import {OnePostItem} from "../../../../../redux/redux-store";
+import {OnePostItem} from "../../../../../redux/profile-reducer";
 
 const OnePost: React.FC<OnePostItem> = (props) => {
     return (

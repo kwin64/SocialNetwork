@@ -1,14 +1,14 @@
 import React from 'react';
 import s from './Sidebar.module.css'
 import {NavLink} from "react-router-dom";
-import {SidebarDataType} from "../../redux/redux-store";
+import {SidebarDataType} from "../../redux/sidebar-reducer";
+
 
 type PropsType = {
     sidebarData: SidebarDataType
 }
 
 const Sidebar: React.FC<PropsType> = (props) => {
-    debugger
     let friendsListElements = props.sidebarData.friendsList.map(f => (
         <span>
             <p>{/*f.id*/}{f.name}</p>
@@ -38,7 +38,6 @@ const Sidebar: React.FC<PropsType> = (props) => {
             <div className={s.containerFriends}>
                 <h3>Friends</h3>
                 <div className={s.friends}>
-
                     <div className={s.friend}>
                         {friendsListElements}
                     </div>

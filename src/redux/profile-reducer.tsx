@@ -1,7 +1,17 @@
-import {ActionsType, PostsDataType} from "./redux-store";
-
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
+export type OnePostItem = {
+    id: number,
+    avatar: string,
+    count: number,
+    post: string,
+    logoCountLikes: string
+}
+export type PostsDataType = {
+    postsItem: Array<OnePostItem>,
+    newPostText: string
+}
 
 let initialState = {
     postsItem: [
@@ -37,21 +47,7 @@ let initialState = {
     newPostText: ''
 }
 
-export type ActionsPostType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
-export const addPostAC = (newPostText: string) => {
-    return {
-        type: 'ADD-POST',
-        newPostText: newPostText
-    } as const
-}
-export const updateNewPostTextAC = (newPostText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newPostText: newPostText
-    } as const
-}
-
-const profileReducer = (state: PostsDataType = initialState, action: ActionsType): PostsDataType => {
+const profileReducer = (state: PostsDataType = initialState, action: ActionsPostType): PostsDataType => {
     let stateCopy = {...state}
     switch (action.type) {
         case UPDATE_NEW_POST_TEXT: {
@@ -75,7 +71,9 @@ const profileReducer = (state: PostsDataType = initialState, action: ActionsType
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const updateNewPostChangeActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newPostText: text})
+export const addPostActionCreator = () => ({type: ADD_POST} as const)
+export const updateNewPostChangeActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newPostText: text} as const)
+
+export type ActionsPostType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostChangeActionCreator>
 
 export default profileReducer;

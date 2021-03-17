@@ -10,7 +10,6 @@ import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import ProfileContainer from './components/Profile/ProfileContainer';
 
 const App: React.FC = () => {
-    debugger
     return (
         <div className={'appWrapper'}>
             <Header/>

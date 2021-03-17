@@ -1,8 +1,9 @@
 import React from "react";
-import {connect} from "react-redux";
 import Users from "./Users";
-import {followAC, setUsersAC, unfollowAC} from "../../redux/users-reducer";
-import {OneUserData, StateType} from "../../redux/redux-store";
+import {connect} from "react-redux";
+import {ActionsUsersType, follow, OneUserData, setUsers, unFollow,} from "../../redux/users-reducer";
+import {Dispatch} from "redux";
+import {StateType} from "../../redux/redux-store";
 
 let mapStateToProps = (store: StateType) => {
     return {
@@ -10,16 +11,16 @@ let mapStateToProps = (store: StateType) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: (arg0: { type: string; userID?: number; users?: OneUserData[]; }) => void) => {
+let mapDispatchToProps = (dispatch: Dispatch<ActionsUsersType>) => {
     return {
         follow: (userID: number) => {
-            dispatch(followAC(userID))
+            dispatch(follow(userID))
         },
         unFollow: (userID: number) => {
-            dispatch(unfollowAC(userID))
+            dispatch(unFollow(userID))
         },
         setUsers: (users: Array<OneUserData>) => {
-            dispatch(setUsersAC(users))
+            dispatch(setUsers(users))
         }
     }
 }
