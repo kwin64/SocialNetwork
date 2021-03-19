@@ -20,13 +20,15 @@ export type UsersDataType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 let initialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 20,
-    currentPage: 1
+    currentPage: 16,
+    isFetching: true
 }
 
 const usersReducer = (state: UsersDataType = initialState, action: ActionsUsersType): UsersDataType => {
