@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Users.module.css";
 import {OneUserData} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type PropsType = {
     userData: Array<OneUserData>
@@ -33,7 +34,9 @@ const Users = (props: PropsType) => {
                 <div className={s.oneUser}>
                     <div className={s.areaUser}>
                         <div>
+                            <NavLink to={'profile/' + u.id}>
                             <img className={s.avatar} src={u.photos.small !== null ? u.photos.small : ''}/>
+                            </NavLink>
                         </div>
                         <div>
                             {u.followed
