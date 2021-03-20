@@ -2,11 +2,11 @@ import React from 'react';
 import s from "./MyPosts.module.css"
 import Posts from "./Posts/Posts";
 import MyPostContainer from "./Post/MyPostContainer";
-import {PostsDataType} from "../../../redux/profile-reducer";
+import {OnePostItem} from "../../../redux/profile-reducer";
 
 
 type PropsType = {
-    postsData: PostsDataType
+    postsData: Array<OnePostItem>
 }
 
 const MyPosts: React.FC<PropsType> = (props) => {

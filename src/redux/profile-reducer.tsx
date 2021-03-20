@@ -64,12 +64,12 @@ let initialState = {
         }
     ] as Array<OnePostItem>,
     newPostText: '' as string,
-    profile: null as null|string
+    profile: null as null | string
 }
 
-export type initialStateType = typeof initialState
+export type InitialProfileDataType = typeof initialState
 
-const profileReducer = (state: initialStateType = initialState, action: ActionsPostType): initialStateType => {
+const profileReducer = (state: InitialProfileDataType = initialState, action: ActionsPostType): InitialProfileDataType => {
 
     switch (action.type) {
         case ADD_POST: {

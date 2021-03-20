@@ -1,11 +1,11 @@
 import React from 'react';
-import {initialStateType} from '../../redux/profile-reducer';
+import {OnePostItem} from '../../redux/profile-reducer';
 import Description from "./Description/Description";
 import MyPosts from "./MyPosts/MyPosts";
 
 
 type PropsType = {
-    postsData: initialStateType
+    postsData: Array<OnePostItem>
     profile: null | string
 }
 

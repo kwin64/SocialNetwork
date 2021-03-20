@@ -2,14 +2,20 @@ import React from "react";
 import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/redux-store";
-import {initialStateType, setUserProfile} from "../../redux/profile-reducer";
+import {InitialProfileDataType, OnePostItem, setUserProfile} from "../../redux/profile-reducer";
 
-type PropsType = {
-    setUserProfile: (profile: string) => void
-    postsData: initialStateType
+type StateType = {
+    postsData: InitialProfileDataType
+}
+type OwnPropsType = {}
+type MapStatePropsType = {
+    postsData: Array<OnePostItem>
     profile: null | string
 }
+type MapDispatchPropsType = {
+    setUserProfile: (profile: null | string) => void
+}
+type PropsType = MapDispatchPropsType & MapStatePropsType
 
 class ProfileContainer extends React.Component<PropsType> {
 
@@ -21,22 +27,22 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
-        return(
+        return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile {...this.props}
+                         profile={this.props.profile}/>
             </div>
         )
     }
-
 }
 
 const mapStateToProps = (state: StateType) => ({
-    profile: state.postsData.profile,
-    postsData: state.postsData
+    postsData: state.postsData.postsItem,
+    profile: state.postsData.profile
 })
 
-// const ProfileUserWithRouter = withRouter(ProfileContainer)
-
-export default connect(mapStateToProps, {setUserProfile})(ProfileContainer);
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(mapStateToProps, {
+    setUserProfile
+})(ProfileContainer);
 
 

@@ -2,31 +2,30 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     follow,
+    InitialUsersDataType,
     OneUserData,
     setCurrentPage,
-    setUsers,
     setTotalUsersCount,
+    setUsers,
     toggleIsFetching,
-    unFollow, InitialUsersDataType,
+    unFollow,
 } from "../../redux/users-reducer";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
 
-type StateType ={
+type StateType = {
     usersData: InitialUsersDataType
 }
-type OwnPropsType ={
-
-}
-type MapStatePropsType ={
-    userData: Array<OneUserData>,
+type OwnPropsType = {}
+type MapStatePropsType = {
+    userData: Array<OneUserData>
     pageSize: number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
 }
-type MapDispatchPropsType ={
+type MapDispatchPropsType = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     setUsers: (users: Array<OneUserData>) => void
@@ -34,7 +33,7 @@ type MapDispatchPropsType ={
     setTotalUsersCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
-type PropsType = StateType & MapDispatchPropsType & MapStatePropsType
+type PropsType = MapDispatchPropsType & MapStatePropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount(): void {
@@ -46,6 +45,7 @@ class UsersContainer extends React.Component<PropsType> {
                 this.props.setTotalUsersCount(response.data.totalCount)
             })
     }
+
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
@@ -55,6 +55,7 @@ class UsersContainer extends React.Component<PropsType> {
                 this.props.setUsers(response.data.items)
             })
     }
+
     render(): React.ReactNode {
         return <>
             {this.props.isFetching ? <Preloader/> : null}
@@ -69,7 +70,7 @@ class UsersContainer extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (store: StateType) : MapStatePropsType=> {
+let mapStateToProps = (store: StateType): MapStatePropsType => {
     return {
         userData: store.usersData.users,
         pageSize: store.usersData.pageSize,
@@ -79,7 +80,7 @@ let mapStateToProps = (store: StateType) : MapStatePropsType=> {
     }
 }
 
-export default connect(mapStateToProps, {
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(mapStateToProps, {
     follow,
     unFollow,
     setUsers,
