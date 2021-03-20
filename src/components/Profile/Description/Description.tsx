@@ -20,7 +20,7 @@ const Description: React.FC<PropsType> = (props) => {
                     <li>Full name: {props.profile.fullName}</li>
                     <li>Contacts: {props.profile.contacts.facebook} </li>
                     <li>Job: {props.profile.lookingForAJobDescription}</li>
-                    <li>Web site: {props.profile.contacts.website}</li>
+                    <li>Web site: {props.profile.contacts.github}</li>
                 </div>
             </div>
     )

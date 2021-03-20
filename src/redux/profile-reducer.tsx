@@ -9,11 +9,6 @@ export type OnePostItem = {
     post: string,
     logoCountLikes: string
 }
-export type PostsDataType = {
-    postsItem: Array<OnePostItem>
-    newPostText: string
-    profile: null | string
-}
 // export type ContactsTypeForPosts = {
 //     facebook: null | string
 //     website: null | string
@@ -67,12 +62,14 @@ let initialState = {
             post: 'Post4',
             logoCountLikes: 'https://img.icons8.com/pastel-glyph/2x/facebook-like--v1.png'
         }
-    ],
-    newPostText: '',
-    profile: null
+    ] as Array<OnePostItem>,
+    newPostText: '' as string,
+    profile: null as null|string
 }
 
-const profileReducer = (state: PostsDataType = initialState, action: ActionsPostType): PostsDataType => {
+export type initialStateType = typeof initialState
+
+const profileReducer = (state: initialStateType = initialState, action: ActionsPostType): initialStateType => {
 
     switch (action.type) {
         case ADD_POST: {

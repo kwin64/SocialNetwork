@@ -2,12 +2,12 @@ import React from "react";
 import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import { StateType } from "../../redux/redux-store";
-import {PostsDataType, setUserProfile} from "../../redux/profile-reducer";
+import {StateType} from "../../redux/redux-store";
+import {initialStateType, setUserProfile} from "../../redux/profile-reducer";
 
 type PropsType = {
     setUserProfile: (profile: string) => void
-    postsData: PostsDataType
+    postsData: initialStateType
     profile: null | string
 }
 
@@ -35,6 +35,8 @@ const mapStateToProps = (state: StateType) => ({
     postsData: state.postsData
 })
 
+// const ProfileUserWithRouter = withRouter(ProfileContainer)
+
 export default connect(mapStateToProps, {setUserProfile})(ProfileContainer);
-//
+
 

@@ -5,7 +5,6 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const TOOGLE_IS_FETCHING = 'TOOGLE_IS_FETCHING'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
-
 export type PhotosType = {
     small: null | string
     large: null | string
@@ -18,23 +17,18 @@ export type OneUserData = {
     status: null
     followed: boolean
 }
-export type UsersDataType = {
-    users: Array<OneUserData>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
+
+let UsersDataType = {
+    users: [] as Array<OneUserData>,
+    pageSize: 5 as number,
+    totalUsersCount: 20 as number,
+    currentPage: 16 as number,
+    isFetching: false as boolean
 }
 
-let initialState = {
-    users: [],
-    pageSize: 5,
-    totalUsersCount: 20,
-    currentPage: 16,
-    isFetching: false
-}
+export type InitialUsersDataType = typeof UsersDataType
 
-const usersReducer = (state: UsersDataType = initialState, action: ActionsUsersType): UsersDataType => {
+const usersReducer = (state: InitialUsersDataType = UsersDataType, action: ActionsUsersType): InitialUsersDataType => {
     switch (action.type) {
         case FOLLOW:
             return {

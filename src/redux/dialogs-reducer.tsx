@@ -2,34 +2,27 @@ const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
 export type MessageItem = { id: number, message: string }
-export type Message = {
-    messageItem: Array<MessageItem>,
-    newMessage: string
-}
 export type DialogItem = { id: number, name: string }
-export type DialogsDataType = {
-    dialogs: Array<DialogItem>,
-    message: Message
-}
 
+export type initialStateType = typeof initialState
 let initialState = {
     dialogs: [
         {id: 1, name: 'Eugene'},
         {id: 2, name: 'Anna'},
         {id: 3, name: 'Alex'},
         {id: 4, name: 'Tatsiana'},
-    ],
+    ] as Array<DialogItem>,
     message: {
         messageItem: [
             {id: 1, message: 'message1'},
             {id: 2, message: 'message2'},
             {id: 3, message: 'message3'},
-        ],
-        newMessage: '',
+        ] as Array<MessageItem>,
+        newMessage: '' as string,
     },
 }
 
-const dialogsReducer = (state: DialogsDataType = initialState, action: ActionsMessageType): DialogsDataType => {
+const dialogsReducer = (state: initialStateType = initialState, action: ActionsMessageType): initialStateType => {
     let stateCopy = {...state}
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT: {

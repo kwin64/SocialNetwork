@@ -7,29 +7,36 @@ import {
     setUsers,
     setTotalUsersCount,
     toggleIsFetching,
-    unFollow,
+    unFollow, InitialUsersDataType,
 } from "../../redux/users-reducer";
-import {StateType} from "../../redux/redux-store";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
 
-type PropsType = {
-    userData: Array<OneUserData>
+type StateType ={
+    usersData: InitialUsersDataType
+}
+type OwnPropsType ={
+
+}
+type MapStatePropsType ={
+    userData: Array<OneUserData>,
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
+}
+type MapDispatchPropsType ={
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     setUsers: (users: Array<OneUserData>) => void
     setCurrentPage: (currentPage: number) => void
-    isFetching: boolean
     setTotalUsersCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
+type PropsType = StateType & MapDispatchPropsType & MapStatePropsType
 
 class UsersContainer extends React.Component<PropsType> {
-
     componentDidMount(): void {
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -39,7 +46,6 @@ class UsersContainer extends React.Component<PropsType> {
                 this.props.setTotalUsersCount(response.data.totalCount)
             })
     }
-
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
@@ -49,7 +55,6 @@ class UsersContainer extends React.Component<PropsType> {
                 this.props.setUsers(response.data.items)
             })
     }
-
     render(): React.ReactNode {
         return <>
             {this.props.isFetching ? <Preloader/> : null}
@@ -64,7 +69,7 @@ class UsersContainer extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (store: StateType) => {
+let mapStateToProps = (store: StateType) : MapStatePropsType=> {
     return {
         userData: store.usersData.users,
         pageSize: store.usersData.pageSize,
