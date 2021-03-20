@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 export type OnePostItem = {
     id: number,
@@ -9,8 +10,9 @@ export type OnePostItem = {
     logoCountLikes: string
 }
 export type PostsDataType = {
-    postsItem: Array<OnePostItem>,
+    postsItem: Array<OnePostItem>
     newPostText: string
+    profile: null | string
 }
 
 let initialState = {
@@ -44,36 +46,51 @@ let initialState = {
             logoCountLikes: 'https://img.icons8.com/pastel-glyph/2x/facebook-like--v1.png'
         }
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
 const profileReducer = (state: PostsDataType = initialState, action: ActionsPostType): PostsDataType => {
-    let stateCopy = {...state}
+
     switch (action.type) {
-        case UPDATE_NEW_POST_TEXT: {
-            stateCopy.newPostText = action.newPostText
-        }
-            return stateCopy
         case ADD_POST: {
-            let newPostText = stateCopy.newPostText
-            stateCopy.newPostText = ''
-            stateCopy.postsItem.unshift({
+            let newPost = {
                 id: 5,
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXQAMy48Pkvq3wmB9wngITgF95ZNOaXEK3FA&usqp=CAU',
                 count: 0,
-                post: newPostText,
+                post: state.newPostText,
                 logoCountLikes: 'https://img.icons8.com/pastel-glyph/2x/facebook-like--v1.png',
-            })
+            }
+            return {
+                ...state,
+                postsItem: [...state.postsItem, newPost],
+                newPostText: '',
+                profile: null
+            }
         }
-            return stateCopy
+        case UPDATE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.newPostText
+            }
+        }
+        case SET_USER_PROFILE: {
+            return {...state, profile: action.profile}
+        }
         default:
             return state
     }
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
-export const updateNewPostChangeActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newPostText: text} as const)
+export const updateNewPostChangeActionCreator = (text: string) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newPostText: text
+} as const)
+export const setUserProfile = (profile: string) => ({type: SET_USER_PROFILE, profile} as const)
 
-export type ActionsPostType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostChangeActionCreator>
+export type ActionsPostType = ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostChangeActionCreator>
+    | ReturnType<typeof setUserProfile>
 
 export default profileReducer;
