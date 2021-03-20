@@ -14,6 +14,28 @@ export type PostsDataType = {
     newPostText: string
     profile: null | string
 }
+// export type ContactsTypeForPosts = {
+//     facebook: null | string
+//     website: null | string
+//     vk: null | string
+//     twitter: null | string
+//     instagram: null | string
+//     youtube: null | string
+//     github: null | string
+//     mainLink: null | string
+// }
+// export type PhotosTypeForPosts = {
+//     small: null | string
+//     large: null | string
+// }
+// export type ProfileTypeForPosts = {
+//     aboutMe: null | string
+//     contacts: ContactsTypeForPosts
+//     lookingForAJobDescription: null | string
+//     fullName: null | string
+//     userId: number
+//     photos: PhotosTypeForPosts
+// }
 
 let initialState = {
     postsItem: [
@@ -63,7 +85,7 @@ const profileReducer = (state: PostsDataType = initialState, action: ActionsPost
             }
             return {
                 ...state,
-                postsItem: [...state.postsItem, newPost],
+                postsItem: [newPost, ...state.postsItem],
                 newPostText: '',
                 profile: null
             }
@@ -87,7 +109,7 @@ export const updateNewPostChangeActionCreator = (text: string) => ({
     type: UPDATE_NEW_POST_TEXT,
     newPostText: text
 } as const)
-export const setUserProfile = (profile: string) => ({type: SET_USER_PROFILE, profile} as const)
+export const setUserProfile = (profile: null | string) => ({type: SET_USER_PROFILE, profile} as const)
 
 export type ActionsPostType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostChangeActionCreator>

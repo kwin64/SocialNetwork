@@ -6,12 +6,13 @@ import MyPosts from "./MyPosts/MyPosts";
 
 type PropsType = {
     postsData: PostsDataType
+    profile: null | string
 }
 
 const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
-            <Description/>
+            <Description profile={props.profile}/>
             <MyPosts postsData={props.postsData}/>
         </div>
     );

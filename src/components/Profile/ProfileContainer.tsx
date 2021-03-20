@@ -3,9 +3,12 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import { StateType } from "../../redux/redux-store";
+import {PostsDataType, setUserProfile} from "../../redux/profile-reducer";
 
 type PropsType = {
-
+    setUserProfile: (profile: string) => void
+    postsData: PostsDataType
+    profile: null | string
 }
 
 class ProfileContainer extends React.Component<PropsType> {
@@ -20,15 +23,18 @@ class ProfileContainer extends React.Component<PropsType> {
     render() {
         return(
             <div>
-                <Profile {this.props} />
+                <Profile {...this.props} profile={this.props.profile}/>
             </div>
         )
     }
 
 }
 
-const mapStateToProps = (state: StateType) => ({a:13})
+const mapStateToProps = (state: StateType) => ({
+    profile: state.postsData.profile,
+    postsData: state.postsData
+})
 
-export default connect(mapStateToProps, setUserProfile)(Profile);
+export default connect(mapStateToProps, {setUserProfile})(ProfileContainer);
 //
 
