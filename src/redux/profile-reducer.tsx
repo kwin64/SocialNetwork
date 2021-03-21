@@ -9,28 +9,29 @@ export type OnePostItem = {
     post: string,
     logoCountLikes: string
 }
-// export type ContactsTypeForPosts = {
-//     facebook: null | string
-//     website: null | string
-//     vk: null | string
-//     twitter: null | string
-//     instagram: null | string
-//     youtube: null | string
-//     github: null | string
-//     mainLink: null | string
-// }
-// export type PhotosTypeForPosts = {
-//     small: null | string
-//     large: null | string
-// }
-// export type ProfileTypeForPosts = {
-//     aboutMe: null | string
-//     contacts: ContactsTypeForPosts
-//     lookingForAJobDescription: null | string
-//     fullName: null | string
-//     userId: number
-//     photos: PhotosTypeForPosts
-// }
+export type ContactsTypeForPosts = {
+    facebook: null | string
+    website: null | string
+    vk: null | string
+    twitter: null | string
+    instagram: null | string
+    youtube: null | string
+    github: null | string
+    mainLink: null | string
+}
+export type PhotosTypeForPosts = {
+    small: null | string
+    large: null | string
+}
+export type ProfileTypeForPosts = {
+    aboutMe: null | string
+    contacts: ContactsTypeForPosts
+    lookingForAJob: boolean
+    lookingForAJobDescription: null | string
+    fullName: null | string
+    userId: number
+    photos: PhotosTypeForPosts
+}
 
 let initialState = {
     postsItem: [
@@ -64,7 +65,7 @@ let initialState = {
         }
     ] as Array<OnePostItem>,
     newPostText: '' as string,
-    profile: null as null | string
+    profile: null as null | ProfileTypeForPosts
 }
 
 export type InitialProfileDataType = typeof initialState
@@ -82,9 +83,7 @@ const profileReducer = (state: InitialProfileDataType = initialState, action: Ac
             }
             return {
                 ...state,
-                postsItem: [newPost, ...state.postsItem],
-                newPostText: '',
-                profile: null
+                postsItem: [newPost, ...state.postsItem]
             }
         }
         case UPDATE_NEW_POST_TEXT: {
@@ -106,7 +105,7 @@ export const updateNewPostChangeActionCreator = (text: string) => ({
     type: UPDATE_NEW_POST_TEXT,
     newPostText: text
 } as const)
-export const setUserProfile = (profile: null | string) => ({type: SET_USER_PROFILE, profile} as const)
+export const setUserProfile = (profile: null | ProfileTypeForPosts) => ({type: SET_USER_PROFILE, profile} as const)
 
 export type ActionsPostType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostChangeActionCreator>

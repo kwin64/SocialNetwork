@@ -33,7 +33,7 @@ type MapDispatchPropsType = {
     setTotalUsersCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
-type PropsType = MapDispatchPropsType & MapStatePropsType
+type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount(): void {
@@ -50,7 +50,7 @@ class UsersContainer extends React.Component<PropsType> {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then((response: any) => {
+            .then((response) => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
             })
@@ -80,7 +80,7 @@ let mapStateToProps = (store: StateType): MapStatePropsType => {
     }
 }
 
-export default connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(mapStateToProps, {
+export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
     follow,
     unFollow,
     setUsers,

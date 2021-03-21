@@ -8,20 +8,20 @@ type StateType = {
 }
 type OwnPropsType = {}
 type MapStatePropsType = {
-    dialogItem: InitialDialogsDataType
+    dialogsItem: InitialDialogsDataType
 }
 type MapDispatchPropsType = {
     newMessageChange: (text: string) => void
-    addMessage: (text: string) => void
+    addMessage: () => void
 }
-type PropsType = MapDispatchPropsType & MapStatePropsType
+type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
 
 class DialogsContainer extends React.Component<PropsType> {
     render() {
         return (
             <div>
                 <Dialogs {...this.props}
-                         dialogsItem={this.props.dialogItem}
+                         dialogsItem={this.props.dialogsItem}
                          newMessageChange={this.props.newMessageChange}
                          addMessage={this.props.addMessage} />
             </div>
@@ -35,7 +35,7 @@ let mapStateToProps = (state: StateType) => {
     }
 }
 
-export default connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(mapStateToProps, {
+export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
     newMessageChange,
     addMessage
 })(DialogsContainer);

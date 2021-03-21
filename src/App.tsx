@@ -16,7 +16,7 @@ const App: React.FC = () => {
             <SidebarContainer/>
             <div className={'appWrapperContent'}>
                 <Route path='/Dialogs' render={() => <DialogContainer/>}/>
-                <Route path='/Profile' render={() => <ProfileContainer/>}/>
+                <Route path='/Profile' render={() => <ProfileContainer />}/>
                 <Route path='/Users' render={() => <UsersContainer/>}/>
                 <Route path='/Music' component={Music}/>
                 <Route path='/Settings' component={Settings}/>
