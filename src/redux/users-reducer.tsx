@@ -56,9 +56,9 @@ const usersReducer = (state: InitialUsersDataType = UsersDataType, action: Actio
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
         }
-        // case SET_TOTAL_USERS_COUNT: {
-        //     return {...state, totalUsersCount: action.totalUsersCount}
-        // }//много страниц
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.totalUsersCount}
+        }
         case TOOGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
         }
