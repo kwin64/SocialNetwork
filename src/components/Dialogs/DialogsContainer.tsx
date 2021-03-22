@@ -2,10 +2,8 @@ import React from "react";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {addMessage, InitialDialogsDataType, newMessageChange} from "../../redux/dialogs-reducer";
+import { StateType } from "../../redux/redux-store";
 
-type StateType = {
-    dialogsData: InitialDialogsDataType
-}
 type OwnPropsType = {}
 type MapStatePropsType = {
     dialogsItem: InitialDialogsDataType

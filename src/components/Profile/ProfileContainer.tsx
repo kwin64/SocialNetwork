@@ -1,13 +1,11 @@
-import React, {ComponentClass} from "react";
+import React from "react";
 import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {InitialProfileDataType, OnePostItem, ProfileTypeForPosts, setUserProfile} from "../../redux/profile-reducer";
+import {OnePostItem, ProfileTypeForPosts, setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {StateType} from "../../redux/redux-store";
 
-type StateType = {
-    initialPostsData: InitialProfileDataType
-}
 type OwnPropsType = {}
 type MapStatePropsType = {
     postsData: Array<OnePostItem>
@@ -35,7 +33,6 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
-        debugger
         return (
             <div>
                 <Profile {...this.props}
@@ -46,10 +43,9 @@ class ProfileContainer extends React.Component<PropsType> {
 }
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
-    debugger
     return {
-        postsData: state.initialPostsData.postsItem,
-        profile: state.initialPostsData.profile
+        postsData: state.postsData.postsItem,
+        profile: state.postsData.profile
     }
 }
 
