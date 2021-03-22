@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './components/Header/Header';
 import './App.css'
 import {Route} from 'react-router-dom';
 import Settings from './components/Settings/Settings';
@@ -8,11 +7,12 @@ import DialogContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 const App: React.FC = () => {
     return (
         <div className={'appWrapper'}>
-            <Header/>
+            <HeaderContainer/>
             <SidebarContainer/>
             <div className={'appWrapperContent'}>
                 <Route path='/Dialogs' render={() => <DialogContainer/>}/>

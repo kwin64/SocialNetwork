@@ -6,7 +6,7 @@ import {InitialProfileDataType, OnePostItem, ProfileTypeForPosts, setUserProfile
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type StateType = {
-    postsData: InitialProfileDataType
+    initialPostsData: InitialProfileDataType
 }
 type OwnPropsType = {}
 type MapStatePropsType = {
@@ -25,7 +25,6 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount(): void {
         let userId = this.props.match.params.userId
-        debugger
         if (!userId) {
             userId = '2'
         }
@@ -46,13 +45,15 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 }
 
-const mapStateToProps = (state: StateType): MapStatePropsType => ({
-    postsData: state.postsData.postsItem,
-    profile: state.postsData.profile
-})
+const mapStateToProps = (state: StateType): MapStatePropsType => {
+    debugger
+    return {
+        postsData: state.initialPostsData.postsItem,
+        profile: state.initialPostsData.profile
+    }
+}
 
-export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
-    setUserProfile
-})(withRouter(ProfileContainer));
+export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>
+(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
 
 
