@@ -29,7 +29,7 @@ class DialogsContainer extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: StateType) : MapStatePropsType => {
     return {
         dialogsItem: state.dialogsData
     }
