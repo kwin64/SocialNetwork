@@ -1,6 +1,7 @@
 import axios from "axios";
 import {InitialUsersDataType} from "./redux/users-reducer";
 import {ProfileTypeForPosts} from "./redux/profile-reducer";
+import {InitialAuthDataType} from "./redux/auth-reducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -19,7 +20,6 @@ export const usersAPI = {
     }
 }
 
-
 export const profileAPI = {
     getInitialPage(userId: string) {
         return instance.get<ProfileTypeForPosts>(`profile/` + userId)
@@ -28,9 +28,12 @@ export const profileAPI = {
             })
     }
 }
-// export const getUsers = (currentPage: number = 1, pageSize: number = 10) => {
-//     return instance.get<InitialUsersDataType>(baseUrl + `users?page=${currentPage}&count=${pageSize}`)
-//         .then(response => {
-//             return response.data
-//         })
-// }
+
+export const headerAPI = {
+    getAuth() {
+        return instance.get<InitialAuthDataType>(`auth/me`)
+            .then(response => {
+                    return response.data
+            })
+    }
+}

@@ -35,7 +35,6 @@ type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount(): void {
         this.props.toggleIsFetching(true)
-
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
                 this.props.toggleIsFetching(false)
