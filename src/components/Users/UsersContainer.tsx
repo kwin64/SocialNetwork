@@ -13,7 +13,8 @@ import {
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import { StateType } from "../../redux/redux-store";
+import {StateType} from "../../redux/redux-store";
+import {getUsers} from "../../api";
 
 type OwnPropsType = {}
 type MapStatePropsType = {
@@ -36,25 +37,23 @@ type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount(): void {
         this.props.toggleIsFetching(true)
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then((response) => {
+
+        getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
-            withCredentials: true
-        })
-            .then((response) => {
+
+        getUsers(pageNumber, this.props.pageSize)
+            .then((data) => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
@@ -74,7 +73,7 @@ class UsersContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (store: StateType): MapStatePropsType => {
     return {
-        userData: store.usersData.users,
+        userData: store.usersData.items,
         pageSize: store.usersData.pageSize,
         totalUsersCount: store.usersData.totalUsersCount,
         currentPage: store.usersData.currentPage,

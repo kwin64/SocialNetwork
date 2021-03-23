@@ -19,7 +19,9 @@ export type OneUserData = {
 }
 
 let UsersDataType = {
-    users: [] as Array<OneUserData>,
+    items: [] as Array<OneUserData>,
+    totalCount: 10981 ,
+    error: null as null | number,
     pageSize: 5 as number,
     totalUsersCount: 20 as number,
     currentPage: 16 as number,
@@ -33,7 +35,7 @@ const usersReducer = (state: InitialUsersDataType = UsersDataType, action: Actio
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
+                items: state.items.map(u => {
                     if (u.id === action.userID) {
                         return {...u, followed: true}
                     }
@@ -43,7 +45,7 @@ const usersReducer = (state: InitialUsersDataType = UsersDataType, action: Actio
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
+                items: state.items.map(u => {
                     if (u.id === action.userID) {
                         return {...u, followed: false}
                     }
@@ -51,7 +53,7 @@ const usersReducer = (state: InitialUsersDataType = UsersDataType, action: Actio
                 })
             }
         case SET_USERS: {
-            return {...state, users: action.users}
+            return {...state, items: action.items}
         }
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
@@ -69,7 +71,7 @@ const usersReducer = (state: InitialUsersDataType = UsersDataType, action: Actio
 
 export const follow = (userID: number) => ({type: FOLLOW, userID} as const)
 export const unFollow = (userID: number) => ({type: UNFOLLOW, userID} as const)
-export const setUsers = (users: Array<OneUserData>) => ({type: SET_USERS, users} as const)
+export const setUsers = (items: Array<OneUserData>) => ({type: SET_USERS, items} as const)
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOOGLE_IS_FETCHING, isFetching} as const)
