@@ -33,7 +33,23 @@ export const headerAPI = {
     getAuth() {
         return instance.get<InitialAuthDataType>(`auth/me`)
             .then(response => {
-                    return response.data
+                return response.data
             })
+    }
+}
+
+export const subscribeAPI = {
+    getUnFollow(id: number) {
+        return instance.delete<InitialAuthDataType>(`follow/${id}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    getFollow(id: number) {
+        return instance.post<InitialAuthDataType>(`follow/${id}`, {})
+            .then(response => {
+                    return response.data
+                }
+            )
     }
 }

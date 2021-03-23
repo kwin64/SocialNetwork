@@ -27,7 +27,7 @@ class ProfileContainer extends React.Component<PropsType> {
             userId = '2'
         }
         profileAPI.getInitialPage(userId)
-            .then((data) => {
+            .then(data => {
                 this.props.setUserProfile(data)
             })
     }
