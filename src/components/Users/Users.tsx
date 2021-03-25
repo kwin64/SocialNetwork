@@ -2,8 +2,6 @@ import React from "react";
 import s from "./Users.module.css";
 import {OneUserData} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {InitialAuthDataType} from "../../redux/auth-reducer";
 import {subscribeAPI} from "../../api";
 
 type PropsType = {
@@ -14,7 +12,6 @@ type PropsType = {
     totalUsersCount: number
     onPageChanged: (pageNumber: number) => void
 }
-
 
 const Users = (props: PropsType) => {
 
