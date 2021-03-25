@@ -11,6 +11,8 @@ type PropsType = {
     unFollow: (userID: number) => void
     totalUsersCount: number
     onPageChanged: (pageNumber: number) => void
+    toggleFollowingProgress: (isFetching: boolean) => void
+    followingInProgress: boolean
 }
 
 const Users = (props: PropsType) => {
@@ -40,20 +42,24 @@ const Users = (props: PropsType) => {
                         </div>
                         <div>
                             {u.followed
-                                ? <button className={s.button} onClick={() => {
+                                ? <button className={s.button} disabled={props.followingInProgress} onClick={() => {
+                                    props.toggleFollowingProgress(true)
                                     subscribeAPI.getUnFollow(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 props.unFollow(u.id)
                                             }
+                                            props.toggleFollowingProgress(false)
                                         })
                                 }}>Unfollow</button>
-                                : <button className={s.button} onClick={() => {
+                                : <button className={s.button} disabled={props.followingInProgress} onClick={() => {
+                                    props.toggleFollowingProgress(true)
                                     subscribeAPI.getFollow(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
+                                            props.toggleFollowingProgress(false)
                                         })
                                 }}>Follow</button>}
                         </div>
