@@ -27,7 +27,7 @@ const UsersDataType = {
     totalUsersCount: 20 as number,
     currentPage: 16 as number,
     isFetching: false as boolean,
-    followingInProgress: false
+    followingInProgress: [2,3,4] as Array<number>
 }
 
 export type InitialUsersDataType = typeof UsersDataType
@@ -67,7 +67,12 @@ const usersReducer = (state: InitialUsersDataType = UsersDataType, action: Actio
             return {...state, isFetching: action.isFetching}
         }
         case TOOGLE_IS_FOLLOWING_PROGRESS: {
-            return {...state, followingInProgress: action.isFetching}
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id=>id!=action.userId)
+            }
         }
         default:
             return state
@@ -80,7 +85,7 @@ export const setUsers = (items: Array<OneUserData>) => ({type: SET_USERS, items}
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOOGLE_IS_FETCHING, isFetching} as const)
-export const toggleFollowingProgress = (isFetching: boolean) => ({type: TOOGLE_IS_FOLLOWING_PROGRESS, isFetching} as const)
+export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({type: TOOGLE_IS_FOLLOWING_PROGRESS, isFetching,userId} as const)
 
 export type ActionsUsersType = ReturnType<typeof follow>
     | ReturnType<typeof unFollow>
