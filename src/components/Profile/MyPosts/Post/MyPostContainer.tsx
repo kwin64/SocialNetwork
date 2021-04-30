@@ -2,7 +2,7 @@ import React from 'react';
 import Post from "./Post";
 import {connect} from "react-redux";
 import {
-    ActionsPostType,
+    ActionsProfileType,
     addPostActionCreator,
     updateNewPostChangeActionCreator
 } from "../../../../redux/profile-reducer";
@@ -14,7 +14,7 @@ let mapStateToProps = (state: StateType) => {
         newPostText: state.postsData.newPostText
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch<ActionsPostType>) => {
+let mapDispatchToProps = (dispatch: Dispatch<ActionsProfileType>) => {
     return {
         onPostChange: (text: string) => {
             dispatch(updateNewPostChangeActionCreator(text))

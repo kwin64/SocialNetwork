@@ -70,7 +70,7 @@ let initialState = {
 
 export type InitialProfileDataType = typeof initialState
 
-const profileReducer = (state: InitialProfileDataType = initialState, action: ActionsPostType): InitialProfileDataType => {
+const profileReducer = (state: InitialProfileDataType = initialState, action: ActionsProfileType): InitialProfileDataType => {
 
     switch (action.type) {
         case ADD_POST: {
@@ -107,7 +107,7 @@ export const updateNewPostChangeActionCreator = (text: string) => ({
 } as const)
 export const setUserProfile = (profile: null | ProfileTypeForPosts) => ({type: SET_USER_PROFILE, profile} as const)
 
-export type ActionsPostType = ReturnType<typeof addPostActionCreator>
+export type ActionsProfileType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostChangeActionCreator>
     | ReturnType<typeof setUserProfile>
 

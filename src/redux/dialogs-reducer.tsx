@@ -22,7 +22,7 @@ let initialState = {
 }
 export type InitialDialogsDataType = typeof initialState
 
-const dialogsReducer = (state: InitialDialogsDataType = initialState, action: ActionsMessageType): InitialDialogsDataType => {
+const dialogsReducer = (state: InitialDialogsDataType = initialState, action: ActionsDialogsType): InitialDialogsDataType => {
     switch (action.type) {
         case ADD_MESSAGE: {
             let newMessage = {id: 4, message: state.message.newMessage}
@@ -51,7 +51,7 @@ const dialogsReducer = (state: InitialDialogsDataType = initialState, action: Ac
 export const addMessage = () => ({type: ADD_MESSAGE} as const)
 export const newMessageChange = (text: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text} as const)
 
-export type ActionsMessageType = ReturnType<typeof addMessage>
+export type ActionsDialogsType = ReturnType<typeof addMessage>
     | ReturnType<typeof newMessageChange>
 
 export default dialogsReducer;
