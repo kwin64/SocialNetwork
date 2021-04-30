@@ -14,42 +14,24 @@ const instance = axios.create({
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
         return instance.get<InitialUsersDataType>(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => {
-                return response.data
-            })
     }
 }
-
 export const profileAPI = {
     getInitialPage(userId: string) {
         return instance.get<ProfileTypeForPosts>(`profile/` + userId)
-            .then(response => {
-                return response.data
-            })
     }
 }
-
 export const headerAPI = {
     getAuth() {
         return instance.get<InitialAuthDataType>(`auth/me`)
-            .then(response => {
-                return response.data
-            })
     }
 }
-
 export const subscribeAPI = {
     unFollow(id: number) {
         return instance.delete<InitialAuthDataType>(`follow/${id}`)
-            .then(response => {
-                return response.data
-            })
     },
     follow(id: number) {
         return instance.post<InitialAuthDataType>(`follow/${id}`, {})
-            .then(response => {
-                    return response.data
-                }
-            )
+
     }
 }

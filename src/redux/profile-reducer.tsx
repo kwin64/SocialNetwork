@@ -111,10 +111,10 @@ export const updateNewPostChangeActionCreator = (text: string) => ({
 } as const)
 export const setUserProfile = (profile: null | ProfileTypeForPosts) => ({type: SET_USER_PROFILE, profile} as const)
 
-export const getItemsPage = (userId: string): AppThunk => (dispatch) => {
+export const getUsersProfile = (userId: string): AppThunk => (dispatch) => {
     profileAPI.getInitialPage(userId)
         .then(data => {
-            dispatch(setUserProfile(data))
+            dispatch(setUserProfile(data.data))
         })
 }
 
