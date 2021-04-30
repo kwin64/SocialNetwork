@@ -39,13 +39,13 @@ export const headerAPI = {
 }
 
 export const subscribeAPI = {
-    getUnFollow(id: number) {
+    unFollow(id: number) {
         return instance.delete<InitialAuthDataType>(`follow/${id}`)
             .then(response => {
                 return response.data
             })
     },
-    getFollow(id: number) {
+    follow(id: number) {
         return instance.post<InitialAuthDataType>(`follow/${id}`, {})
             .then(response => {
                     return response.data
