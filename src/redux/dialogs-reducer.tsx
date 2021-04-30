@@ -51,6 +51,8 @@ const dialogsReducer = (state: InitialDialogsDataType = initialState, action: Ac
 export const addMessage = () => ({type: ADD_MESSAGE} as const)
 export const newMessageChange = (text: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text} as const)
 
+
+
 export type ActionsDialogsType = ReturnType<typeof addMessage>
     | ReturnType<typeof newMessageChange>
 

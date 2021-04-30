@@ -1,3 +1,7 @@
+import {AppThunk} from "./redux-store";
+import {profileAPI, subscribeAPI} from "../api";
+import {toggleFollowingProgress, unFollowSuccess} from "./users-reducer";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -10,25 +14,25 @@ export type OnePostItem = {
     logoCountLikes: string
 }
 export type ContactsTypeForPosts = {
-    facebook: null | string
-    website: null | string
-    vk: null | string
-    twitter: null | string
-    instagram: null | string
-    youtube: null | string
-    github: null | string
-    mainLink: null | string
+    facebook: null
+    website: null
+    vk: null
+    twitter: null
+    instagram: null
+    youtube: null
+    github: null
+    mainLink: null
 }
 export type PhotosTypeForPosts = {
-    small: null | string
-    large: null | string
+    small: null
+    large: null
 }
 export type ProfileTypeForPosts = {
-    aboutMe: null | string
+    aboutMe: null
     contacts: ContactsTypeForPosts
     lookingForAJob: boolean
-    lookingForAJobDescription: null | string
-    fullName: null | string
+    lookingForAJobDescription: null
+    fullName: null
     userId: number
     photos: PhotosTypeForPosts
 }
@@ -64,7 +68,7 @@ let initialState = {
             logoCountLikes: 'https://img.icons8.com/pastel-glyph/2x/facebook-like--v1.png'
         }
     ] as Array<OnePostItem>,
-    newPostText: '' as string,
+    newPostText: '',
     profile: null as null | ProfileTypeForPosts
 }
 
@@ -106,6 +110,13 @@ export const updateNewPostChangeActionCreator = (text: string) => ({
     newPostText: text
 } as const)
 export const setUserProfile = (profile: null | ProfileTypeForPosts) => ({type: SET_USER_PROFILE, profile} as const)
+
+export const getItemsPage = (userId: string): AppThunk => (dispatch) => {
+    profileAPI.getInitialPage(userId)
+        .then(data => {
+            dispatch(setUserProfile(data))
+        })
+}
 
 export type ActionsProfileType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostChangeActionCreator>

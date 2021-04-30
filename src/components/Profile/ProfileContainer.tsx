@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {OnePostItem, ProfileTypeForPosts, setUserProfile} from "../../redux/profile-reducer";
+import {getItemsPage, OnePostItem, ProfileTypeForPosts, setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {StateType} from "../../redux/redux-store";
 import {profileAPI} from "../../api";
@@ -15,7 +15,7 @@ type MapDispatchPropsType = {
     setUserProfile: (profile: null | ProfileTypeForPosts) => void
 }
 type PathParamsType = {
-    userId: string | undefined
+    userId: string
 }
 type PropsType = RouteComponentProps<PathParamsType> & MapDispatchPropsType & MapStatePropsType & OwnPropsType
 
@@ -26,6 +26,7 @@ class ProfileContainer extends React.Component<PropsType> {
         if (!userId) {
             userId = '2'
         }
+        getItemsPage(userId)
         profileAPI.getInitialPage(userId)
             .then(data => {
                 this.props.setUserProfile(data)
