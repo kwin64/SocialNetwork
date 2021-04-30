@@ -1,3 +1,5 @@
+import {usersAPI} from "../api";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -21,13 +23,13 @@ export type OneUserData = {
 
 const UsersDataType = {
     items: [] as Array<OneUserData>,
-    totalCount: 10981 ,
+    totalCount: 10981,
     error: null as null | number,
     pageSize: 5 as number,
     totalUsersCount: 20 as number,
     currentPage: 16 as number,
     isFetching: false as boolean,
-    followingInProgress: [2,3,4] as Array<number>
+    followingInProgress: [2, 3, 4] as Array<number>
 }
 
 export type InitialUsersDataType = typeof UsersDataType
@@ -71,7 +73,7 @@ const usersReducer = (state: InitialUsersDataType = UsersDataType, action: Actio
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id=>id!=action.userId)
+                    : state.followingInProgress.filter(id => id != action.userId)
             }
         }
         default:
@@ -85,7 +87,26 @@ export const setUsers = (items: Array<OneUserData>) => ({type: SET_USERS, items}
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOOGLE_IS_FETCHING, isFetching} as const)
-export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({type: TOOGLE_IS_FOLLOWING_PROGRESS, isFetching,userId} as const)
+export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({
+    type: TOOGLE_IS_FOLLOWING_PROGRESS,
+    isFetching,
+    userId
+} as const)
+
+
+export const getUsers = (currentPage: number, pageSize: number) => {
+
+    return (dispatch: any) => {
+        dispatch(toggleIsFetching(true))
+
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+            })
+    }
+}
 
 export type ActionsUsersType = ReturnType<typeof follow>
     | ReturnType<typeof unFollow>
