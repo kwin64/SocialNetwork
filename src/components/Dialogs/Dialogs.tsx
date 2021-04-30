@@ -3,11 +3,13 @@ import s from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Messages from "./Messages/Messages";
 import {InitialDialogsDataType} from "../../redux/dialogs-reducer";
+import {Redirect} from "react-router-dom";
 
 type PropsType = {
-    dialogsItem: InitialDialogsDataType,
+    dialogsItem: InitialDialogsDataType
     newMessageChange: (text: string) => void
     addMessage: () => void
+    isAuth: boolean
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
@@ -28,6 +30,8 @@ const Dialogs: React.FC<PropsType> = (props) => {
             props.newMessageChange(text)
         }
     }
+
+    if (!props.isAuth) return <Redirect to='/login'/>
 
     return (
         <div className={s.container}>

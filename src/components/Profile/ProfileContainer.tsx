@@ -4,11 +4,13 @@ import {connect} from "react-redux";
 import {getUsersProfile, OnePostItem, ProfileTypeForPosts} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {StateType} from "../../redux/redux-store";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type OwnPropsType = {}
 type MapStatePropsType = {
     postsData: Array<OnePostItem>
     profile: null | ProfileTypeForPosts
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUsersProfile: (userId: string) => void
@@ -32,20 +34,25 @@ class ProfileContainer extends React.Component<PropsType> {
         return (
             <div>
                 <Profile {...this.props}
-                         profile={this.props.profile}/>
+                         profile={this.props.profile}
+                />
             </div>
         )
     }
 }
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
+
     return {
         postsData: state.postsData.postsItem,
-        profile: state.postsData.profile
+        profile: state.postsData.profile,
+        isAuth: state.auth.isAuth
     }
 }
 
+const AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
 export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>
-(mapStateToProps, {getUsersProfile})(withRouter(ProfileContainer));
+(mapStateToProps, {getUsersProfile})(withRouter(AuthRedirectComponent));
 
 
