@@ -4,6 +4,9 @@ import {follow, getUsers, OneUserData, setCurrentPage, unFollow,} from "../../re
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
 import {StateType} from "../../redux/redux-store";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type OwnPropsType = {}
 type MapStatePropsType = {
@@ -20,7 +23,7 @@ type MapDispatchPropsType = {
     setCurrentPage: (currentPage: number) => void
     getUsers: any
 }
-type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
+type PropsType = RouteComponentProps & MapDispatchPropsType & MapStatePropsType & OwnPropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount(): void {
@@ -57,9 +60,9 @@ let mapStateToProps = (store: StateType): MapStatePropsType => {
     }
 }
 
-export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
+export default withAuthRedirect(connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
     follow,
     unFollow,
     setCurrentPage,
     getUsers
-})(UsersContainer)
+})(withRouter(UsersContainer)))

@@ -4,17 +4,17 @@ import {connect} from "react-redux";
 import {addMessage, InitialDialogsDataType, newMessageChange} from "../../redux/dialogs-reducer";
 import {StateType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type OwnPropsType = {}
 type MapStatePropsType = {
     dialogsItem: InitialDialogsDataType
-    isAuth: boolean
 }
 type MapDispatchPropsType = {
     newMessageChange: (text: string) => void
     addMessage: () => void
 }
-type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
+type PropsType = RouteComponentProps & MapDispatchPropsType & MapStatePropsType & OwnPropsType
 
 class DialogsContainer extends React.Component<PropsType> {
     render() {
@@ -24,7 +24,6 @@ class DialogsContainer extends React.Component<PropsType> {
                          dialogsItem={this.props.dialogsItem}
                          newMessageChange={this.props.newMessageChange}
                          addMessage={this.props.addMessage}
-                         isAuth={this.props.isAuth}
                 />
             </div>
         )
@@ -33,14 +32,11 @@ class DialogsContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
-        dialogsItem: state.dialogsData,
-        isAuth: state.auth.isAuth
+        dialogsItem: state.dialogsData
     }
 }
 
-const AuthRedirectComponent = withAuthRedirect(Dialogs)
-
-export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
+export default withAuthRedirect(connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
     newMessageChange,
     addMessage
-})(AuthRedirectComponent);
+}))(withRouter(DialogsContainer));

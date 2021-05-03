@@ -9,7 +9,6 @@ type PropsType = {
     dialogsItem: InitialDialogsDataType
     newMessageChange: (text: string) => void
     addMessage: () => void
-    isAuth: boolean
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
@@ -30,8 +29,6 @@ const Dialogs: React.FC<PropsType> = (props) => {
             props.newMessageChange(text)
         }
     }
-
-    if (!props.isAuth) return <Redirect to='/login'/>
 
     return (
         <div className={s.container}>

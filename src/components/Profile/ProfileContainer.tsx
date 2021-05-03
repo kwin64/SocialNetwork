@@ -10,7 +10,6 @@ type OwnPropsType = {}
 type MapStatePropsType = {
     postsData: Array<OnePostItem>
     profile: null | ProfileTypeForPosts
-    isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUsersProfile: (userId: string) => void
@@ -47,11 +46,10 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         postsData: state.postsData.postsItem,
         profile: state.postsData.profile,
-        isAuth: state.auth.isAuth
     }
 }
 
+
+
 export default withAuthRedirect(connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>
-(mapStateToProps, {getUsersProfile})(withRouter(ProfileContainer)));
-
-
+(mapStateToProps, {getUsersProfile})(withRouter(ProfileContainer)))
