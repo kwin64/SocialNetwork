@@ -14,25 +14,25 @@ export type OnePostItem = {
     logoCountLikes: string
 }
 export type ContactsTypeForPosts = {
-    facebook: null
-    website: null
-    vk: null
-    twitter: null
-    instagram: null
-    youtube: null
-    github: null
-    mainLink: null
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
 }
 export type PhotosTypeForPosts = {
-    small: null
-    large: null
+    small: string
+    large: string
 }
 export type ProfileTypeForPosts = {
     aboutMe: null
     contacts: ContactsTypeForPosts
     lookingForAJob: boolean
     lookingForAJobDescription: null
-    fullName: null
+    fullName: string
     userId: number
     photos: PhotosTypeForPosts
 }

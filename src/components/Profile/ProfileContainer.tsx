@@ -1,12 +1,10 @@
-import React, { ComponentType } from "react";
+import React, {ComponentType} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getUsersProfile, OnePostItem, ProfileTypeForPosts} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {StateType} from "../../redux/redux-store";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {follow, getUsers, setCurrentPage, unFollow} from "../../redux/users-reducer";
 
 type OwnPropsType = {}
 type MapStatePropsType = {
@@ -55,7 +53,6 @@ export default compose<ComponentType>(
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
         getUsersProfile
     }),
-    withRouter,
-    withAuthRedirect
+    withRouter
 )(ProfileContainer)
 
