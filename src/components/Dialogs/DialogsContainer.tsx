@@ -1,10 +1,11 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {addMessage, InitialDialogsDataType, newMessageChange} from "../../redux/dialogs-reducer";
 import {StateType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 type OwnPropsType = {}
 type MapStatePropsType = {
@@ -36,7 +37,11 @@ let mapStateToProps = (state: StateType): MapStatePropsType => {
     }
 }
 
-export default withAuthRedirect(connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
-    newMessageChange,
-    addMessage
-}))(withRouter(DialogsContainer));
+export default compose<ComponentType>(
+    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
+        newMessageChange,
+        addMessage
+    }),
+    withRouter,
+    withAuthRedirect
+)(DialogsContainer)

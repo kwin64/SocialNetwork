@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {connect} from "react-redux";
 import {follow, getUsers, OneUserData, setCurrentPage, unFollow,} from "../../redux/users-reducer";
 import Users from "./Users";
@@ -60,9 +60,13 @@ let mapStateToProps = (store: StateType): MapStatePropsType => {
     }
 }
 
-export default withAuthRedirect(connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
-    follow,
-    unFollow,
-    setCurrentPage,
-    getUsers
-})(withRouter(UsersContainer)))
+export default compose<ComponentType>(
+    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
+        follow,
+        unFollow,
+        setCurrentPage,
+        getUsers
+    }),
+    withRouter,
+    withAuthRedirect
+)(UsersContainer)
