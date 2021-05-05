@@ -7,12 +7,17 @@ import MyPosts from "./MyPosts/MyPosts";
 type PropsType = {
     postsData: Array<OnePostItem>
     profile: null | ProfileTypeForPosts
+    status: string
+    updateStatus:(status: string)=> void
 }
 
 const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
-            <Description profile={props.profile}/>
+            <Description profile={props.profile}
+                         status={props.status}
+                         updateStatus={props.updateStatus}
+            />
             <MyPosts postsData={props.postsData}/>
         </div>
     );

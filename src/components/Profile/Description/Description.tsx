@@ -6,6 +6,8 @@ import {ProfileTypeForPosts} from "../../../redux/profile-reducer";
 
 type PropsType = {
     profile: null | ProfileTypeForPosts
+    status: string
+    updateStatus:(status: string)=> void
 }
 
 const Description: React.FC<PropsType> = (props) => {
@@ -17,7 +19,9 @@ const Description: React.FC<PropsType> = (props) => {
             <div>
                 <img src={props.profile.photos.large}/>
             </div>
-            <ProfileStatus status={'Hello'}/>
+            <ProfileStatus status={props.status}
+                           updateStatus={props.updateStatus}
+            />
             <div className={s.info}>
                 <li>Full name: {props.profile.fullName}</li>
                 <li>Contacts: {props.profile.contacts.facebook} </li>

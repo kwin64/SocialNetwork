@@ -131,6 +131,14 @@ export const getStatus = (userId: string): AppThunk => (dispatch) => {
         })
 }
 
+export const updateStatus = (status: string): AppThunk => (dispatch) => {
+    profileAPI.getStatus(status)
+        .then(data => {
+            if(data.data.resultCode === 0)
+            dispatch(setStatus(status))
+        })
+}
+
 export type ActionsProfileType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostChangeActionCreator>
     | ReturnType<typeof setUserProfile>
