@@ -27,6 +27,7 @@ class ProfileContainer extends React.Component<PropsType> {
             userId = '2'
         }
         this.props.getUsersProfile(userId)
+        this.props.getUserStatus(userId)
     }
 
     render() {
@@ -46,6 +47,7 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         postsData: state.postsData.postsItem,
         profile: state.postsData.profile,
+        status: state.postsData.status
     }
 }
 

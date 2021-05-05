@@ -1,10 +1,10 @@
 import {AppThunk} from "./redux-store";
-import {profileAPI, subscribeAPI} from "../api";
-import {toggleFollowingProgress, unFollowSuccess} from "./users-reducer";
+import {profileAPI} from "../api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 export type OnePostItem = {
     id: number,
@@ -28,7 +28,7 @@ export type PhotosTypeForPosts = {
     large: string
 }
 export type ProfileTypeForPosts = {
-    aboutMe: null
+    aboutMe: string
     contacts: ContactsTypeForPosts
     lookingForAJob: boolean
     lookingForAJobDescription: null
@@ -69,7 +69,8 @@ let initialState = {
         }
     ] as Array<OnePostItem>,
     newPostText: '',
-    profile: null as null | ProfileTypeForPosts
+    profile: null as null | ProfileTypeForPosts,
+    status: ''
 }
 
 export type InitialProfileDataType = typeof initialState
@@ -99,6 +100,11 @@ const profileReducer = (state: InitialProfileDataType = initialState, action: Ac
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.status}
+        }
         default:
             return state
     }
@@ -110,6 +116,7 @@ export const updateNewPostChangeActionCreator = (text: string) => ({
     newPostText: text
 } as const)
 export const setUserProfile = (profile: null | ProfileTypeForPosts) => ({type: SET_USER_PROFILE, profile} as const)
+export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 
 export const getUsersProfile = (userId: string): AppThunk => (dispatch) => {
     profileAPI.getInitialPage(userId)
@@ -117,9 +124,16 @@ export const getUsersProfile = (userId: string): AppThunk => (dispatch) => {
             dispatch(setUserProfile(data.data))
         })
 }
+export const getStatus = (userId: string): AppThunk => (dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(data => {
+            dispatch(setStatus(data.data))
+        })
+}
 
 export type ActionsProfileType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostChangeActionCreator>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
 
 export default profileReducer;
