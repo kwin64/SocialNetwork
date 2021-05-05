@@ -103,7 +103,8 @@ const profileReducer = (state: InitialProfileDataType = initialState, action: Ac
         case SET_STATUS: {
             return {
                 ...state,
-                status: action.status}
+                status: action.status
+            }
         }
         default:
             return state
@@ -132,10 +133,10 @@ export const getStatus = (userId: string): AppThunk => (dispatch) => {
 }
 
 export const updateStatus = (status: string): AppThunk => (dispatch) => {
-    profileAPI.getStatus(status)
+    profileAPI.updateStatus(status)
         .then(data => {
-            if(data.data.resultCode === 0)
-            dispatch(setStatus(status))
+            if (data.data.resultCode === 0)
+                dispatch(setStatus(status))
         })
 }
 
