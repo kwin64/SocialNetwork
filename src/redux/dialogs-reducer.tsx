@@ -1,4 +1,3 @@
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
 export type MessageItem = { id: number, message: string }
@@ -25,21 +24,12 @@ export type InitialDialogsDataType = typeof initialState
 const dialogsReducer = (state: InitialDialogsDataType = initialState, action: ActionsDialogsType): InitialDialogsDataType => {
     switch (action.type) {
         case ADD_MESSAGE: {
-            let newMessage = {id: 4, message: state.message.newMessage}
+            let body = {id: 4, message: action.newMessageBody}
             return {
                 ...state,
                 message: {
                     ...state.message,
-                    messageItem: [...state.message.messageItem, newMessage]
-                }
-            }
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                message: {
-                    ...state.message,
-                    newMessage: action.newMessage
+                    messageItem: [...state.message.messageItem, body]
                 }
             }
         }
@@ -48,12 +38,9 @@ const dialogsReducer = (state: InitialDialogsDataType = initialState, action: Ac
     }
 }
 
-export const addMessage = () => ({type: ADD_MESSAGE} as const)
-export const newMessageChange = (text: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text} as const)
 
-
+export const addMessage = (newMessageBody: string) => ({type: ADD_MESSAGE, newMessageBody} as const)
 
 export type ActionsDialogsType = ReturnType<typeof addMessage>
-    | ReturnType<typeof newMessageChange>
 
 export default dialogsReducer;

@@ -7,8 +7,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type PropsType = {
     dialogsItem: InitialDialogsDataType
-    newMessageChange: (text: string) => void
-    addMessage: () => void
+    addMessage: (newMessageBody: string) => void
 }
 
 type FormDataType = {
@@ -16,9 +15,8 @@ type FormDataType = {
 }
 
 type IProps = {
-    addMessage: () => void
+    addMessage: (newMessageBody: string) => void
     dialogsItem: InitialDialogsDataType
-    newMessageChange: (text: string) => void
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
@@ -26,9 +24,19 @@ const Dialogs: React.FC<PropsType> = (props) => {
     const dialogElements = props.dialogsItem.dialogs.map(d => <Dialog id={d.id} name={d.name}/>);
     const messagesElements = props.dialogsItem.message.messageItem.map(m => <Messages id={m.id} message={m.message}/>)
 
-    const onSubmit = (values: InjectedFormProps<FormDataType> & IProps) => {
-        console.log(values)
+    let addMessage = (newMessageBody: string) => {
+        if (newMessageElement.current) {
+            props.addMessage(newMessageBody)
+        }
     }
+
+    let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
+
+    const onSubmit = (values: InjectedFormProps<FormDataType> & IProps & any) => {
+        console.log(values.newMessageBody)
+        props.addMessage(values.newMessageBody)
+    }
+
     return (
         <div className={s.container}>
             <div className={s.dialogs}>
