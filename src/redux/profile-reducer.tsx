@@ -2,7 +2,6 @@ import {AppThunk} from "./redux-store";
 import {profileAPI} from "../api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -68,7 +67,6 @@ let initialState = {
             logoCountLikes: 'https://img.icons8.com/pastel-glyph/2x/facebook-like--v1.png'
         }
     ] as Array<OnePostItem>,
-    newPostText: '',
     profile: null as null | ProfileTypeForPosts,
     status: ''
 }
@@ -83,18 +81,12 @@ const profileReducer = (state: InitialProfileDataType = initialState, action: Ac
                 id: 5,
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXQAMy48Pkvq3wmB9wngITgF95ZNOaXEK3FA&usqp=CAU',
                 count: 0,
-                post: state.newPostText,
+                post: action.newPostBody,
                 logoCountLikes: 'https://img.icons8.com/pastel-glyph/2x/facebook-like--v1.png',
             }
             return {
                 ...state,
                 postsItem: [newPost, ...state.postsItem]
-            }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newPostText
             }
         }
         case SET_USER_PROFILE: {
@@ -111,11 +103,7 @@ const profileReducer = (state: InitialProfileDataType = initialState, action: Ac
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST} as const)
-export const updateNewPostChangeActionCreator = (text: string) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newPostText: text
-} as const)
+export const addPostActionCreator = (newPostBody: string) => ({type: ADD_POST, newPostBody} as const)
 export const setUserProfile = (profile: null | ProfileTypeForPosts) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 
@@ -131,7 +119,6 @@ export const getStatus = (userId: string): AppThunk => (dispatch) => {
             dispatch(setStatus(data.data))
         })
 }
-
 export const updateStatus = (status: string): AppThunk => (dispatch) => {
     profileAPI.updateStatus(status)
         .then(data => {
@@ -141,7 +128,6 @@ export const updateStatus = (status: string): AppThunk => (dispatch) => {
 }
 
 export type ActionsProfileType = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostChangeActionCreator>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 

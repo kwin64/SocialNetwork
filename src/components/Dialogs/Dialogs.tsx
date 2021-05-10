@@ -9,11 +9,9 @@ type PropsType = {
     dialogsItem: InitialDialogsDataType
     addMessage: (newMessageBody: string) => void
 }
-
 type FormDataType = {
     newMessageBody: string
 }
-
 type IProps = {
     addMessage: (newMessageBody: string) => void
     dialogsItem: InitialDialogsDataType
@@ -24,16 +22,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
     const dialogElements = props.dialogsItem.dialogs.map(d => <Dialog id={d.id} name={d.name}/>);
     const messagesElements = props.dialogsItem.message.messageItem.map(m => <Messages id={m.id} message={m.message}/>)
 
-    let addMessage = (newMessageBody: string) => {
-        if (newMessageElement.current) {
-            props.addMessage(newMessageBody)
-        }
-    }
-
-    let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
-
     const onSubmit = (values: InjectedFormProps<FormDataType> & IProps & any) => {
-        console.log(values.newMessageBody)
         props.addMessage(values.newMessageBody)
     }
 
@@ -51,18 +40,6 @@ const Dialogs: React.FC<PropsType> = (props) => {
 }
 
 const AddMessageForm: React.FC<InjectedFormProps<FormDataType> & IProps & any> = (props) => {
-    // let addMessage = () => {
-    //     if (newMessageElement.current) {
-    //         props.addMessage()
-    //     }
-    // }
-    // let newMessageChange = () => {
-    //     if (newMessageElement.current) {
-    //         let text = newMessageElement.current.value
-    //         props.newMessageChange(text)
-    //     }
-    // }
-    // let newMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     return (
         <form onSubmit={props.handleSubmit}>
@@ -71,7 +48,7 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDataType> & IProps & any> =
                        name='newMessageBody'
                        placeholder='Enter your message'
                 />
-                <button> Send message</button>
+                <button>Send message</button>
             </div>
         </form>
     )
