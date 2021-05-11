@@ -36,7 +36,7 @@ const authReducer = (state: InitialAuthDataType = initialState, action: ActionsA
     }
 }
 
-export const setUserData = (id: string, login: string, email: string, isAuth: boolean) => ({
+export const setUserData = (id: number, login: string, email: string, isAuth: boolean) => ({
     type: SET_USER_DATA,
     payload: {id, login, email, isAuth}
 } as const)
@@ -62,7 +62,7 @@ export const logout = (): AppThunk => (dispatch) => {
     authAPI.logout()
         .then(data => {
             if (data.data.resultCode === 0) {
-                dispatch(setUserData('', '', '', false))
+                dispatch(setUserData(0, '', '', false))
             }
         })
 }
