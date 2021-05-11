@@ -46,6 +46,15 @@ export const getAuthUsersData = (): AppThunk => (dispatch) => {
             }
         })
 }
+export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
+    headerAPI.getAuth()
+        .then(data => {
+            if (data.data.resultCode === 0) {
+                dispatch(setUserData(data.data.data))
+            }
+        })
+}
+
 
 export type ActionsAuthType = ReturnType<typeof setUserData>
 
