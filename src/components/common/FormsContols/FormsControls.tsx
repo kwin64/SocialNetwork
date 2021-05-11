@@ -1,31 +1,31 @@
 import React from 'react';
 import s from './FormsControls.module.css'
+import {WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
 
-type PropsType = {}
+type FormControlPropsType = {
+    meta: WrappedFieldMetaProps
+}
 
-// @ts-ignore
-const FormControl: React.FC<PropsType> = ({input, meta, child, ...props}) => {
-    const hasError = meta.touched && meta.error
+const FormControl: React.FC<FormControlPropsType> = ({meta: {touched, error}, children, ...props}) => {
+    const hasError = touched && error
     return (
         <div className={s.formControl + '' + (hasError ? s.error : '')}>
             <div>
-                {props.children}
+                {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 }
 
-// @ts-ignore
-export const Textarea: React.FC<PropsType> = (props) => {
-    // @ts-ignore
-    const {input, meta, child, ...restProps} = props
+
+export const Textarea: React.FC<WrappedFieldProps> = props => {
+    const {input, meta, ...restProps} = props
     return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
 }
 
-// @ts-ignore
-export const Input: React.FC<PropsType> = (props) => {
-    // @ts-ignore
-    const {input, meta, child, ...restProps} = props
-    return <FormControl><input {...input}{...restProps}/></FormControl>
+export const Input: React.FC<WrappedFieldProps> = props => {
+    const {input, meta, ...restProps} = props
+    return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 }
+
