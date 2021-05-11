@@ -1,6 +1,5 @@
 import {subscribeAPI, usersAPI} from "../api";
-import {Dispatch} from "redux";
-import {ActionsType, AppThunk} from "./redux-store";
+import {AppThunk} from "./redux-store";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'

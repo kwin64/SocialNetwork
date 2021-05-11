@@ -43,12 +43,9 @@ export const subscribeAPI = {
 }
 export const authAPI = {
     login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+        return instance.post<any>(`auth/login`, {email, password, rememberMe})
     },
-    me() {
-        return instance.get(`auth/me`)
-    },
-    logout(){
-        return instance.delete(`auth/login`)
+    logout() {
+        return instance.delete<any>(`auth/login`)
     }
 }

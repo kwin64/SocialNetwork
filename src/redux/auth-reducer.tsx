@@ -1,24 +1,25 @@
-import {headerAPI} from "../api";
+import {authAPI, headerAPI} from "../api";
 import {AppThunk} from "./redux-store";
 
 const SET_USER_DATA = 'SET-USER-DATA';
 
 export type DataUser = {
-    id: null
-    login: null
-    email: null
+    id: string
+    login: string
+    email: string
+    isAuth: boolean
 }
 
 let initialState = {
     data: {
-        id: null,
-        login: null,
-        email: null
-    },
+        id: '',
+        login: '',
+        email: '',
+        isAuth: false
+    } as DataUser,
     message: [],
     fieldsErrors: [],
     resultCode: 1 | 0,
-    isAuth: false
 }
 
 export type InitialAuthDataType = typeof initialState
@@ -28,29 +29,40 @@ const authReducer = (state: InitialAuthDataType = initialState, action: ActionsA
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload,
             }
         default:
             return state
     }
 }
 
-export const setUserData = (data: DataUser) => ({type: SET_USER_DATA, data} as const)
+export const setUserData = (id: string, login: string, email: string, isAuth: boolean) => ({
+    type: SET_USER_DATA,
+    payload: {id, login, email, isAuth}
+} as const)
 
 export const getAuthUsersData = (): AppThunk => (dispatch) => {
     headerAPI.getAuth()
         .then(data => {
             if (data.data.resultCode === 0) {
-                dispatch(setUserData(data.data.data))
+                let {id, login, email} = data.data.data
+                dispatch(setUserData(id, login, email, true))
             }
         })
 }
 export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
-    headerAPI.getAuth()
+    authAPI.login(email, password, rememberMe)
         .then(data => {
             if (data.data.resultCode === 0) {
-                dispatch(setUserData(data.data.data))
+                dispatch(getAuthUsersData())
+            }
+        })
+}
+export const logout = (): AppThunk => (dispatch) => {
+    authAPI.logout()
+        .then(data => {
+            if (data.data.resultCode === 0) {
+                dispatch(setUserData('', '', '', false))
             }
         })
 }
