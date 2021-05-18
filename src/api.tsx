@@ -15,7 +15,7 @@ export type AuthMeApiType = {
     resultCode: 1 | 0
     messages: [],
     data: {
-        id: number,
+        id: string,
         email: string,
         login: string
     }
@@ -56,10 +56,10 @@ export const profileAPI = {
     }
 }
 export const subscribeAPI = {
-    unFollow(id: number) {
+    unFollow(id: string) {
         return instance.delete<InitialAuthDataType>(`follow/${id}`)
     },
-    follow(id: number) {
+    follow(id: string) {
         return instance.post<InitialAuthDataType>(`follow/${id}`, {})
 
     }

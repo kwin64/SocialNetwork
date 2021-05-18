@@ -15,7 +15,7 @@ export type PhotosType = {
 }
 export type OneUserData = {
     name: string
-    id: number
+    id: string
     uniqueUrlName: null
     photos: PhotosType
     status: null
@@ -30,7 +30,7 @@ const UsersDataType = {
     totalUsersCount: 20,
     currentPage: 16,
     isFetching: false,
-    followingInProgress: [2, 3, 4] as Array<number>
+    followingInProgress: ['2', '3', '4'] as Array<string>
 }
 
 export type InitialUsersDataType = typeof UsersDataType
@@ -82,13 +82,13 @@ const usersReducer = (state: InitialUsersDataType = UsersDataType, action: Actio
     }
 }
 
-export const followSuccess = (userID: number) => ({type: FOLLOW, userID} as const)
-export const unFollowSuccess = (userID: number) => ({type: UNFOLLOW, userID} as const)
+export const followSuccess = (userID: string) => ({type: FOLLOW, userID} as const)
+export const unFollowSuccess = (userID: string) => ({type: UNFOLLOW, userID} as const)
 export const setUsers = (items: Array<OneUserData>) => ({type: SET_USERS, items} as const)
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOOGLE_IS_FETCHING, isFetching} as const)
-export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({
+export const toggleFollowingProgress = (isFetching: boolean, userId: string) => ({
     type: TOOGLE_IS_FOLLOWING_PROGRESS,
     isFetching,
     userId
@@ -104,7 +104,7 @@ export const getUsers = (currentPage: number, pageSize: number): AppThunk => (di
             dispatch(setTotalUsersCount(data.data.totalCount))
         })
 }
-export const follow = (userId: number): AppThunk => (dispatch) => {
+export const follow = (userId: string): AppThunk => (dispatch) => {
     dispatch(toggleFollowingProgress(true, userId))
     subscribeAPI.follow(userId)
         .then(data => {
@@ -114,7 +114,7 @@ export const follow = (userId: number): AppThunk => (dispatch) => {
             dispatch(toggleFollowingProgress(false, userId))
         })
 }
-export const unFollow = (userId: number): AppThunk => (dispatch) => {
+export const unFollow = (userId: string): AppThunk => (dispatch) => {
     dispatch(toggleFollowingProgress(true, userId))
     subscribeAPI.unFollow(userId)
         .then(data => {

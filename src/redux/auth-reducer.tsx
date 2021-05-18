@@ -5,7 +5,7 @@ import {AppThunk} from "./redux-store";
 const SET_USER_DATA = 'SET-USER-DATA';
 
 export type DataUser = {
-    id: number
+    id: string
     login: string
     email: string
     isAuth: boolean
@@ -13,7 +13,7 @@ export type DataUser = {
 
 let initialState = {
     data: {
-        id: 0,
+        id: '',
         login: '',
         email: '',
         isAuth: false
@@ -37,7 +37,7 @@ const authReducer = (state: InitialAuthDataType = initialState, action: ActionsA
     }
 }
 
-export const setUserData = (id: number, login: string, email: string, isAuth: boolean) => ({
+export const setUserData = (id: string, login: string, email: string, isAuth: boolean) => ({
     type: SET_USER_DATA,
     payload: {id, login, email, isAuth}
 } as const)
@@ -68,7 +68,7 @@ export const logout = (): AppThunk => (dispatch) => {
     authAPI.logout()
         .then(data => {
             if (data.data.resultCode === 0) {
-                dispatch(setUserData(0, '', '', false))
+                dispatch(setUserData('', '', '', false))
             }
         })
 }

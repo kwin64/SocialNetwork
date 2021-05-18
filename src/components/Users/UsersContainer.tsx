@@ -15,13 +15,13 @@ type MapStatePropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: Array<number>
+    followingInProgress: Array<string>
 }
 type MapDispatchPropsType = {
-    follow: (userID: number) => void
-    unFollow: (userID: number) => void
+    follow: (userID: string) => void
+    unFollow: (userID: string) => void
     setCurrentPage: (currentPage: number) => void
-    getUsers: any
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 type PropsType = RouteComponentProps & MapDispatchPropsType & MapStatePropsType & OwnPropsType
 

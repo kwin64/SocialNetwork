@@ -6,11 +6,11 @@ import {NavLink} from "react-router-dom";
 type PropsType = {
     userData: Array<OneUserData>
     pageSize: number
-    follow: (userID: number) => void
-    unFollow: (userID: number) => void
+    follow: (userID: string) => void
+    unFollow: (userID: string) => void
     totalUsersCount: number
     onPageChanged: (pageNumber: number) => void
-    followingInProgress: Array<number>
+    followingInProgress: Array<string>
 }
 
 const Users = (props: PropsType) => {
