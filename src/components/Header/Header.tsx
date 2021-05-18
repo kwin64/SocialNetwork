@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 type PropsType = {
     isAuth: boolean
     login: null | string
+    logout: () => void
 }
 
 const Header: React.FC<PropsType> = (props) => {
@@ -13,7 +14,7 @@ const Header: React.FC<PropsType> = (props) => {
             <img src={'https://www.baqend.com/_nuxt/img/d251998.svg'}/>
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ? props.login
+                    ? <div>{props.login} - <button onClick={props.logout}>Log out</button></div>
                     : <NavLink to={'/login'}>login</NavLink>}
             </div>
         </div>

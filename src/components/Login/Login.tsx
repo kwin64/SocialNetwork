@@ -1,12 +1,11 @@
 import React from "react";
-import {Field, reduxForm, InjectedFormProps} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsContols/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
-import {AppThunk, StateType} from "../../redux/redux-store";
+import {StateType} from "../../redux/redux-store";
 import {Redirect, RouteComponentProps} from "react-router-dom";
-import {OnePostItem, ProfileTypeForPosts} from "../../redux/profile-reducer";
 
 type OwnPropsType = {}
 type MapStatePropsType = {
