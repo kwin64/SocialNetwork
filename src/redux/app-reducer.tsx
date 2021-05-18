@@ -26,9 +26,10 @@ export const initializedSuccess = () => ({
 } as const)
 
 export const initializeApp = (): AppThunk => (dispatch) => {
-    dispatch(getAuthUsersData())
+    let promise = dispatch(getAuthUsersData())
     Promise.all([promise])
         .then(() => {
+            // @ts-ignore
             dispatch(initializedSuccess())
         })
 }
