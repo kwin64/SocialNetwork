@@ -6,6 +6,7 @@ import usersReducer, {ActionsUsersType} from "./users-reducer";
 import authReducer, {ActionsAuthType} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
+import appReducer from "./app-reducer";
 
 export type StateType = ReturnType<typeof reducers>
 export type ActionsType = ActionsProfileType | ActionsAuthType | ActionsDialogsType | ActionsUsersType
@@ -21,7 +22,8 @@ let reducers = combineReducers({
     sidebarData: sidebarReducer,
     usersData: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 });
 
 let store: Store = createStore(reducers, applyMiddleware(thunkMiddleware));
