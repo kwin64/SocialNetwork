@@ -26,7 +26,7 @@ const UsersDataType = {
     items: [] as Array<OneUserData>,
     totalCount: 10981,
     error: null,
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 20,
     currentPage: 16,
     isFetching: false,

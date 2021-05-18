@@ -5,6 +5,7 @@ import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {AppThunk} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 type FormDataType = {
     email: string
@@ -28,6 +29,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             </div>
             <div>
                 <Field placeholder={'Password'}
+                       type='password'
                        name={'password'}
                        component={Input}
                        validate={[required]}
@@ -55,6 +57,10 @@ const Login: React.FC<LoginPropsType> = (props: any) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 
+    if (props.isAuth) {
+        return <Redirect to={'/Profile'}/>
+    }
+
     return (
         <div>
             <h1>Login</h1>
@@ -63,4 +69,8 @@ const Login: React.FC<LoginPropsType> = (props: any) => {
     )
 }
 
-export default connect(null, {login})(Login);
+const mapStateToProps = (state: any) => {
+    isAuth: state.auth.isAuth
+}
+
+export default connect(mapStateToProps, {login})(Login);

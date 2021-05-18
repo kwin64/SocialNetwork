@@ -29,6 +29,15 @@ export type AuthLoginApiType = {
         rememberMe: boolean
     }
 }
+export type ApiType = {
+    resultCode: 1 | 0
+    messages: [],
+    data: {
+        email: string,
+        password: string,
+        rememberMe: boolean
+    }
+}
 
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
@@ -46,11 +55,6 @@ export const profileAPI = {
         return instance.put(`profile/status`, {status: status})
     }
 }
-export const headerAPI = {
-    getAuth() {
-        return instance.get<AuthMeApiType>(`auth/me`)
-    }
-}
 export const subscribeAPI = {
     unFollow(id: number) {
         return instance.delete<InitialAuthDataType>(`follow/${id}`)
@@ -61,6 +65,9 @@ export const subscribeAPI = {
     }
 }
 export const authAPI = {
+    me() {
+        return instance.get<AuthMeApiType>(`auth/me`)
+    },
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post<AuthLoginApiType>(`auth/login`, {email, password, rememberMe})
     },
