@@ -12,7 +12,7 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {StateType} from "./redux/redux-store";
 import {compose} from "redux";
-import {initializeApp, initializedSuccess} from "./redux/app-reducer";
+import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/preloader/Preloader";
 
 type MapDispatchPropsType = {

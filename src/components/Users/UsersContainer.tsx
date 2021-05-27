@@ -4,9 +4,15 @@ import {follow, getUsers, OneUserData, setCurrentPage, unFollow,} from "../../re
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
 import {StateType} from "../../redux/redux-store";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount, getUserData,
+} from "../../redux/users-selectors";
 
 type OwnPropsType = {}
 type MapStatePropsType = {
@@ -49,14 +55,25 @@ class UsersContainer extends React.Component<PropsType> {
     }
 }
 
+// let mapStateToProps = (store: StateType): MapStatePropsType => {
+//     return {
+//         userData: store.usersData.items,
+//         pageSize: store.usersData.pageSize,
+//         totalUsersCount: store.usersData.totalUsersCount,
+//         currentPage: store.usersData.currentPage,
+//         isFetching: store.usersData.isFetching,
+//         followingInProgress: store.usersData.followingInProgress
+//     }
+// }
+
 let mapStateToProps = (store: StateType): MapStatePropsType => {
     return {
-        userData: store.usersData.items,
-        pageSize: store.usersData.pageSize,
-        totalUsersCount: store.usersData.totalUsersCount,
-        currentPage: store.usersData.currentPage,
-        isFetching: store.usersData.isFetching,
-        followingInProgress: store.usersData.followingInProgress
+        userData: getUserData(store),
+        pageSize: getPageSize(store),
+        totalUsersCount: getTotalUsersCount(store),
+        currentPage: getCurrentPage(store),
+        isFetching: getIsFetching(store),
+        followingInProgress: getFollowingInProgress(store)
     }
 }
 
@@ -67,6 +84,5 @@ export default compose<ComponentType>(
         setCurrentPage,
         getUsers
     }),
-    withRouter,
-    withAuthRedirect
+    withRouter
 )(UsersContainer)
