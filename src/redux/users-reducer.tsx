@@ -95,9 +95,11 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: string) => 
 } as const)
 
 
-export const getUsers = (currentPage: number, pageSize: number): AppThunk => (dispatch) => {
+export const getUsers = (page: number, pageSize: number): AppThunk => (dispatch) => {
     dispatch(toggleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize)
+    dispatch(setCurrentPage(page))
+
+    usersAPI.getUsers(page, pageSize)
         .then(data => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.data.items))
