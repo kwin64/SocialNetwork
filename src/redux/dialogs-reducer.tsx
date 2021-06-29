@@ -24,12 +24,11 @@ export type InitialDialogsDataType = typeof initialState
 const dialogsReducer = (state: InitialDialogsDataType = initialState, action: ActionsDialogsType): InitialDialogsDataType => {
     switch (action.type) {
         case ADD_MESSAGE: {
-            let body = {id: 4, message: action.newMessageBody}
             return {
                 ...state,
                 message: {
                     ...state.message,
-                    messageItem: [...state.message.messageItem, body]
+                    messageItem: [...state.message.messageItem, {id: 4, message: action.newMessageBody}]
                 }
             }
         }
