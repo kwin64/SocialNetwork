@@ -9,13 +9,17 @@ type PropsType = {
     postsData: Array<OnePostItem>
 }
 
-const MyPosts: React.FC<PropsType> = (props) => {
-    return (
-        <div className={s.post}>
-            <MyPostContainer/>
-            <Posts postsData={props.postsData}/>
-        </div>
-    );
-}
+const MyPosts: React.FC<PropsType> = React.memo((props) => {
+        console.log('render')
+
+        return (
+
+            <div className={s.post}>
+                <MyPostContainer/>
+                <Posts postsData={props.postsData}/>
+            </div>
+        );
+    }
+)
 
 export default MyPosts;

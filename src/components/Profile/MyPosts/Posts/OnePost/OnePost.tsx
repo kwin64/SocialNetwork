@@ -2,8 +2,10 @@ import React from 'react';
 import s from "./OnePost.module.css"
 import {OnePostItem} from "../../../../../redux/profile-reducer";
 
-const OnePost: React.FC<OnePostItem> = (props) => {
+function OnePost(props: OnePostItem) {
+
     return (
+
         <div className={s.post}>
             <span>
                 <div>{/*{props.id}*/}</div>
